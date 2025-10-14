@@ -8,23 +8,26 @@ import {
   FiSettings,
   FiLogOut,
   FiChevronDown,
-  FiChevronRight,
   FiX,
-  FiMenu,
+  FiUser,
+  FiTruck,
+  FiMapPin,
+  FiUserCheck,
+  FiUserPlus,
+  FiPlusSquare,
+  FiSearch,
+  FiFileText,
+  FiTrendingUp,
+  FiDollarSign,
 } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminSidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
-  const [openMenus, setOpenMenus] = useState({
-    management: false,
-    reports: false,
-  });
+  const [openMenu, setOpenMenu] = useState(null);
 
   const toggleMenu = menuName => {
-    setOpenMenus(prev => ({
-      ...prev,
-      [menuName]: !prev[menuName],
-    }));
+    setOpenMenu(prev => (prev === menuName ? null : menuName));
   };
 
   const isActive = path => location.pathname === path;
@@ -39,28 +42,48 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
       name: 'Management',
       icon: <FiUsers className="w-5 h-5" />,
       submenu: [
-        { name: 'Riders', path: '/admin/riders' },
-        { name: 'Branches', path: '/admin/branches' },
-        { name: 'Customers', path: '/admin/customers' },
-        { name: 'Employees', path: '/admin/employees' },
+        { name: 'Riders', path: '/admin/riders', icon: <FiTruck /> },
+        { name: 'Branches', path: '/admin/branches', icon: <FiMapPin /> },
+        { name: 'Customers', path: '/admin/customers', icon: <FiUserCheck /> },
+        { name: 'Employees', path: '/admin/employees', icon: <FiUserPlus /> },
       ],
     },
     {
       name: 'Packages',
       icon: <FiPackage className="w-5 h-5" />,
       submenu: [
-        { name: 'All Packages', path: '/admin/packages' },
-        { name: 'Add New Package', path: '/admin/packages/new' },
-        { name: 'Track Package', path: '/admin/packages/track' },
+        { name: 'All Packages', path: '/admin/packages', icon: <FiPackage /> },
+        {
+          name: 'Add New Package',
+          path: '/admin/packages/new',
+          icon: <FiPlusSquare />,
+        },
+        {
+          name: 'Track Package',
+          path: '/admin/packages/track',
+          icon: <FiSearch />,
+        },
       ],
     },
     {
       name: 'Reports',
       icon: <FiBarChart2 className="w-5 h-5" />,
       submenu: [
-        { name: 'Delivery Reports', path: '/admin/reports/delivery' },
-        { name: 'Financial Reports', path: '/admin/reports/financial' },
-        { name: 'Performance Reports', path: '/admin/reports/performance' },
+        {
+          name: 'Delivery Reports',
+          path: '/admin/reports/delivery',
+          icon: <FiFileText />,
+        },
+        {
+          name: 'Financial Reports',
+          path: '/admin/reports/financial',
+          icon: <FiDollarSign />,
+        },
+        {
+          name: 'Performance Reports',
+          path: '/admin/reports/performance',
+          icon: <FiTrendingUp />,
+        },
       ],
     },
     {
@@ -70,9 +93,18 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
     },
   ];
 
+  const submenuVariants = {
+    closed: { opacity: 0, height: 0, transition: { duration: 0.2 } },
+    open: { opacity: 1, height: 'auto', transition: { duration: 0.3 } },
+  };
+
+  const iconVariants = {
+    rotate: { rotate: 180, transition: { duration: 0.2 } },
+    normal: { rotate: 0, transition: { duration: 0.2 } },
+  };
+
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
@@ -80,11 +112,11 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
         ></div>
       )}
 
-      {/* Sidebar */}
       <div
         className={`bg-gray-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out overflow-y-auto
-          ${isOpen ? 'w-64 translate-x-0' : 'w-20 -translate-x-0'}`}
+          ${isOpen ? 'w-64' : 'w-20'}`}
       >
+        {/* Header */}
         <div className="p-4 border-b border-gray-700 flex justify-between items-center">
           {isOpen ? (
             <>
@@ -106,11 +138,12 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
               onClick={toggleSidebar}
               className="text-gray-400 hover:text-white"
             >
-              <FiMenu className="h-6 w-6" />
+              <FiUser className="h-6 w-6 text-white" />
             </button>
           )}
         </div>
 
+        {/* Navigation */}
         <nav className="mt-4">
           <ul>
             {menuItems.map((item, index) => (
@@ -120,42 +153,55 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                     <button
                       onClick={() => {
                         if (!isOpen) toggleSidebar();
-                        toggleMenu(item.name.toLowerCase());
+                        toggleMenu(item.name);
                       }}
                       className={`w-full flex items-center justify-between p-4 text-left hover:bg-gray-700 transition-colors ${
-                        openMenus[item.name.toLowerCase()] ? 'bg-gray-700' : ''
+                        openMenu === item.name ? 'bg-gray-700' : ''
                       }`}
                     >
                       <div className="flex items-center">
                         <span className="mr-3">{item.icon}</span>
                         {isOpen && <span>{item.name}</span>}
                       </div>
-                      {isOpen &&
-                        (openMenus[item.name.toLowerCase()] ? (
+                      {isOpen && (
+                        <motion.div
+                          variants={iconVariants}
+                          animate={openMenu === item.name ? 'rotate' : 'normal'}
+                        >
                           <FiChevronDown className="w-4 h-4" />
-                        ) : (
-                          <FiChevronRight className="w-4 h-4" />
-                        ))}
+                        </motion.div>
+                      )}
                     </button>
 
-                    {isOpen && openMenus[item.name.toLowerCase()] && (
-                      <ul className="bg-gray-900 ml-8 py-2">
-                        {item.submenu.map((subItem, subIndex) => (
-                          <li key={subIndex}>
-                            <Link
-                              to={subItem.path}
-                              className={`block px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
-                                isActive(subItem.path)
-                                  ? 'bg-gray-700 border-l-4 border-blue-500'
-                                  : ''
-                              }`}
-                            >
-                              {subItem.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                    <AnimatePresence>
+                      {isOpen && openMenu === item.name && (
+                        <motion.ul
+                          className="bg-gray-900 ml-8 overflow-hidden"
+                          variants={submenuVariants}
+                          initial="closed"
+                          animate="open"
+                          exit="closed"
+                        >
+                          {item.submenu.map((subItem, subIndex) => (
+                            <li key={subIndex}>
+                              <Link
+                                to={subItem.path}
+                                className={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-700 transition-colors ${
+                                  isActive(subItem.path)
+                                    ? 'bg-gray-700 border-l-4 border-blue-500'
+                                    : ''
+                                }`}
+                              >
+                                <span className="text-gray-400">
+                                  {subItem.icon}
+                                </span>
+                                {subItem.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
                   </>
                 ) : (
                   <Link
@@ -176,6 +222,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
 
+        {/* Logout */}
         {isOpen && (
           <div className="absolute bottom-0 w-full p-4 border-t border-gray-700">
             <button className="flex items-center text-red-400 hover:text-red-300 w-full p-2 hover:bg-gray-700 rounded transition-colors">

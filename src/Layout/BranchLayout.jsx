@@ -18,69 +18,60 @@ const BranchLayout = ({ children }) => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // Additional security check
+  // Security check
   if (userRole !== 'branch') {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center text-lg font-semibold">
         Unauthorized Access
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen flex bg-gray-100">
+      {/* Sidebar */}
       <BranchSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="flex-1 flex flex-col">
-        <nav className="bg-white shadow">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex items-center">
-                <button
-                  onClick={toggleSidebar}
-                  className="mr-4 text-gray-500 hover:text-gray-700 focus:outline-none"
-                >
-                  <FiMenu className="h-6 w-6" />
-                </button>
-                <div className="flex-shrink-0 flex items-center">
-                  <h1 className="text-xl font-bold">
-                    Courier Service - Branch
-                  </h1>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="flex-shrink-0">
-                  <button className="flex items-center text-gray-700 hover:text-gray-900 mr-4">
-                    <FiUser className="h-6 w-6" />
-                  </button>
-                  <span className="rounded-full bg-yellow-200 px-3 py-1 text-sm font-medium">
-                    Branch
-                  </span>
-                  <button
-                    onClick={handleLogout}
-                    className="ml-4 bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
+
+      {/* Main Content Area */}
+      <div
+        className={`flex-1 flex flex-col transition-all duration-300 ${
+          sidebarOpen ? 'lg:ml-64' : 'lg:ml-20'
+        }`}
+      >
+        {/* Navbar */}
+        <nav className="w-full bg-white shadow-md">
+          <div className="flex justify-between items-center px-6 py-4">
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={toggleSidebar}
+                className="text-gray-600 hover:text-gray-800 focus:outline-none"
+              >
+                <FiMenu className="h-6 w-6" />
+              </button>
+              <h1 className="text-xl font-bold text-gray-800">
+                Courier Service - Branch
+              </h1>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <FiUser className="h-6 w-6 text-gray-700" />
+              <span className="rounded-full bg-yellow-200 px-3 py-1 text-sm font-medium">
+                Branch
+              </span>
+              <button
+                onClick={handleLogout}
+                className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </nav>
 
-        <div className="py-10 flex-1">
-          <header>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold leading-tight text-gray-900">
-                Branch Dashboard
-              </h1>
-            </div>
-          </header>
-          <main>
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-              <div className="px-4 py-8 sm:px-0">{children}</div>
-            </div>
-          </main>
-        </div>
+        {/* Main Content (Outlet) */}
+        <main className="flex-1 w-full bg-gray-50 p-6">
+          <div className="bg-white shadow rounded-xl p-6">{children}</div>
+        </main>
       </div>
     </div>
   );
