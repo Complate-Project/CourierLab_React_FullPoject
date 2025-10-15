@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import AdminSidebar from '../Components/Admin/Sidebar/AdminSidebar';
-import { FiMenu, FiUser } from 'react-icons/fi';
+import Navbar from '../Components/Admin/Navbar/Navbar';
+import Footer from '../Components/Admin/Footer/Footer';
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = () => {
   const { logout, userRole } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,70 +15,37 @@ const AdminLayout = ({ children }) => {
     navigate('/login');
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  // Security check
   if (userRole !== 'admin') {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-lg font-semibold">
-        Unauthorized Access
-      </div>
-    );
+    navigate('/login');
   }
 
   return (
     <div className="min-h-screen flex bg-gray-100">
-      {/* Sidebar */}
       <AdminSidebar
         isOpen={sidebarOpen}
         toggleSidebar={toggleSidebar}
         logout={handleLogout}
       />
 
-      {/* Main area */}
       <div
         className={`flex-1 flex flex-col transition-all duration-300 ${
           sidebarOpen ? 'lg:ml-64' : 'lg:ml-20'
         }`}
       >
         {/* Navbar */}
-        <nav className="w-full bg-white shadow-md">
-          <div className="flex justify-between items-center px-6 py-4">
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={toggleSidebar}
-                className="text-gray-600 hover:text-gray-800 focus:outline-none"
-              >
-                <FiMenu className="h-6 w-6" />
-              </button>
-              <h1 className="text-xl font-bold text-gray-800">
-                Courier Service - Admin
-              </h1>
-            </div>
+        <Navbar toggleSidebar={toggleSidebar}></Navbar>
 
-            <div className="flex items-center space-x-4">
-              <FiUser className="h-6 w-6 text-gray-700" />
-              <span className="rounded-full bg-gray-200 px-3 py-1 text-sm font-medium">
-                Admin
-              </span>
-              <button
-                onClick={handleLogout}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </nav>
-
-        {/* Page Content (Outlet) */}
-        <main className="flex-1 w-full bg-gray-50 p-6 overflow-y-auto">
-          <div className="bg-white shadow rounded-xl p-6 min-h-full">
-            {children}
+        {/* Outlet for child routes */}
+        <main className="flex-1 w-full p-4   overflow-y-auto">
+          <div className=" min-h-full overflow-y-scroll">
+            <Outlet />
           </div>
         </main>
+
+        {/* footer */}
+        <Footer></Footer>
       </div>
     </div>
   );

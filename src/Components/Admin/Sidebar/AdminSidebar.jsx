@@ -62,12 +62,12 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
       submenu: [
         {
           name: 'Company Info',
-          path: '/admin/company-info',
+          path: '/admin/dashboard/company-info',
           icon: <FiTruck />,
         },
         {
           name: 'Expense Type',
-          path: '/admin/expense-type',
+          path: '/admin/dashboard/expense-type',
           icon: <FiMapPin />,
         },
         {
@@ -668,10 +668,12 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
         <div className="p-4 border-t border-gray-700">
           <button
             onClick={logout}
-            className="flex items-center text-red-400 hover:text-red-300 w-full p-2 hover:bg-gray-700 rounded transition-colors"
+            className={`flex items-center w-full p-2 hover:bg-gray-700 rounded transition-colors text-red-400 hover:text-red-300 ${
+              !isOpen ? 'justify-center' : ''
+            }`}
           >
-            <FiLogOut className="mr-3" />
-            <span>Logout</span>
+            <FiLogOut className="w-5 h-5" />
+            {isOpen && <span className="ml-3">Logout</span>}
           </button>
         </div>
       </div>
