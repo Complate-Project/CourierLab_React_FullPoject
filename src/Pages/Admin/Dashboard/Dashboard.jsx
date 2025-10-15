@@ -15,12 +15,12 @@ import {
   FiArrowDown,
   FiCalendar,
   FiSearch,
+  FiStar,
 } from 'react-icons/fi';
 
 const Dashboard = () => {
   const [timeRange, setTimeRange] = useState('today');
 
-  // Stats Data
   const stats = [
     {
       title: 'Total Packages',
@@ -60,361 +60,297 @@ const Dashboard = () => {
     },
   ];
 
-  // Recent Activities
   const recentActivities = [
     {
       id: 1,
-      type: 'delivery',
       message: 'Package #DR-2847 delivered successfully',
       time: '2 minutes ago',
-      status: 'success',
       icon: <FiCheckCircle className="w-4 h-4 text-green-500" />,
     },
     {
       id: 2,
-      type: 'pickup',
       message: 'New pickup scheduled for #PK-8932',
       time: '15 minutes ago',
-      status: 'info',
       icon: <FiClock className="w-4 h-4 text-blue-500" />,
     },
     {
       id: 3,
-      type: 'issue',
       message: 'Delivery attempt failed for #DR-4721',
       time: '1 hour ago',
-      status: 'warning',
       icon: <FiAlertCircle className="w-4 h-4 text-yellow-500" />,
     },
-    {
-      id: 4,
-      type: 'rider',
-      message: 'New rider registered: John Smith',
-      time: '2 hours ago',
-      status: 'info',
-      icon: <FiUsers className="w-4 h-4 text-blue-500" />,
-    },
-    {
-      id: 5,
-      type: 'payment',
-      message: 'Payment received for #INV-8234',
-      time: '3 hours ago',
-      status: 'success',
-      icon: <FiDollarSign className="w-4 h-4 text-green-500" />,
-    },
   ];
 
-  // Package Status
-  const packageStatus = [
-    { status: 'Pending', count: 156, color: 'bg-yellow-500', percentage: 25 },
-    { status: 'In Transit', count: 189, color: 'bg-blue-500', percentage: 30 },
-    { status: 'Delivered', count: 842, color: 'bg-green-500', percentage: 67 },
-    { status: 'Failed', count: 61, color: 'bg-red-500', percentage: 5 },
-  ];
-
-  // Top Performing Riders
   const topRiders = [
     { name: 'Michael Chen', deliveries: 142, rating: 4.9, status: 'active' },
     { name: 'Sarah Johnson', deliveries: 138, rating: 4.8, status: 'active' },
     { name: 'David Wilson', deliveries: 125, rating: 4.7, status: 'on-break' },
-    { name: 'Emily Brown', deliveries: 118, rating: 4.8, status: 'active' },
-    { name: 'Alex Garcia', deliveries: 112, rating: 4.6, status: 'active' },
   ];
 
+  const topBranches = [
+    {
+      name: 'Downtown Central',
+      location: 'New York, NY',
+      packages: 1248,
+      revenue: '$45,670',
+      growth: '+15%',
+      rating: 4.8,
+      status: 'high',
+    },
+    {
+      name: 'Westside Hub',
+      location: 'Los Angeles, CA',
+      packages: 987,
+      revenue: '$38,920',
+      growth: '+12%',
+      rating: 4.7,
+      status: 'high',
+    },
+  ];
+
+  const getStatusColor = status => {
+    switch (status) {
+      case 'high':
+        return 'bg-green-100 text-green-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-6 ">
+    <div className="min-h-screen bg-gray-50 p-6 space-y-8">
       {/* Header */}
-      <div className="mb-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              Welcome, Admin!
-            </h1>
-            <p className="text-gray-600">
-              This is the admin dashboard. Here you can manage riders, branches,
-              and oversee the entire courier service operations.
-            </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+          <p className="text-gray-600">
+            Welcome back! Here’s what’s happening today.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <select
+              value={timeRange}
+              onChange={e => setTimeRange(e.target.value)}
+              className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+            <FiCalendar className="absolute right-2 top-3 w-4 h-4 text-gray-400" />
           </div>
-          <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-            <div className="relative">
-              <select
-                value={timeRange}
-                onChange={e => setTimeRange(e.target.value)}
-                className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="today">Today</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
-                <option value="quarter">This Quarter</option>
-              </select>
-              <FiCalendar className="absolute right-2 top-3 w-4 h-4 text-gray-400 pointer-events-none" />
-            </div>
-            <div className="relative">
-              <FiSearch className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
+
+          <div className="relative">
+            <FiSearch className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
           </div>
         </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+      {/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        {stats.map((stat, i) => (
+          <Link
+            to={stat.link}
+            key={i}
+            className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition"
           >
-            <Link to={stat.link} className="block">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    {stat.title}
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">
-                    {stat.value}
-                  </p>
-                  <div
-                    className={`flex items-center mt-2 text-sm ${
-                      stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                    }`}
-                  >
-                    {stat.trend === 'up' ? (
-                      <FiArrowUp className="w-4 h-4 mr-1" />
-                    ) : (
-                      <FiArrowDown className="w-4 h-4 mr-1" />
-                    )}
-                    <span>{stat.change} from last period</span>
-                  </div>
-                </div>
-                <div className={`${stat.color} rounded-lg p-3 text-white`}>
-                  {stat.icon}
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600">{stat.title}</p>
+                <h3 className="text-2xl font-bold mt-1">{stat.value}</h3>
+                <div
+                  className={`flex items-center text-sm mt-2 ${
+                    stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                  }`}
+                >
+                  {stat.trend === 'up' ? (
+                    <FiArrowUp className="mr-1" />
+                  ) : (
+                    <FiArrowDown className="mr-1" />
+                  )}
+                  {stat.change}
                 </div>
               </div>
-            </Link>
-          </div>
+              <div className={`${stat.color} text-white p-3 rounded-lg`}>
+                {stat.icon}
+              </div>
+            </div>
+          </Link>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Package Status */}
-        <div className="lg:col-span-2">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Package Status Overview
-              </h2>
-              <Link
-                to="/admin/packages"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-              >
-                View All
-              </Link>
-            </div>
-            <div className="space-y-4">
-              {packageStatus.map((pkg, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-3 h-3 rounded-full ${pkg.color}`}></div>
-                    <span className="text-sm font-medium text-gray-700">
-                      {pkg.status}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <span className="text-sm text-gray-600">
-                      {pkg.count} packages
-                    </span>
-                    <div className="w-24 bg-gray-200 rounded-full h-2">
-                      <div
-                        className={`h-2 rounded-full ${pkg.color}`}
-                        style={{ width: `${pkg.percentage}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-sm text-gray-500 w-8">
-                      {pkg.percentage}%
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+      {/* Middle Section: Riders + Branches */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Top Riders */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-lg text-gray-900">Top Riders</h2>
+            <Link
+              to="/admin/riders"
+              className="text-blue-600 text-sm hover:underline"
+            >
+              View All
+            </Link>
           </div>
 
-          {/* Recent Activities */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Recent Activities
-              </h2>
-              <Link
-                to="/admin/activities"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+          <div className="space-y-4">
+            {topRiders.map((rider, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between hover:bg-gray-50 p-3 rounded-lg"
               >
-                View All
-              </Link>
-            </div>
-            <div className="space-y-4">
-              {recentActivities.map(activity => (
-                <div
-                  key={activity.id}
-                  className="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  <div className="flex-shrink-0 mt-1">{activity.icon}</div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900">{activity.message}</p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {activity.time}
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-600 font-medium text-sm">
+                      {rider.name
+                        .split(' ')
+                        .map(n => n[0])
+                        .join('')}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {rider.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {rider.deliveries} deliveries
                     </p>
                   </div>
-                  <button className="flex-shrink-0 text-gray-400 hover:text-gray-600">
-                    <FiEye className="w-4 h-4" />
-                  </button>
                 </div>
-              ))}
-            </div>
+
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-900">
+                    ⭐ {rider.rating}
+                  </p>
+                  <span
+                    className={`text-xs px-2 py-1 rounded-full ${
+                      rider.status === 'active'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}
+                  >
+                    {rider.status === 'active' ? 'Active' : 'On Break'}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Right Sidebar */}
-        <div className="space-y-6">
-          {/* Top Performing Riders */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Top Riders
-              </h2>
-              <Link
-                to="/admin/riders"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+        {/* Top Branches */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-lg text-gray-900">
+              Top Branches
+            </h2>
+            <Link
+              to="/admin/branches"
+              className="text-blue-600 text-sm hover:underline"
+            >
+              View All
+            </Link>
+          </div>
+
+          <div className="space-y-4">
+            {topBranches.map((branch, i) => (
+              <div
+                key={i}
+                className="p-3 rounded-lg hover:bg-gray-50 border border-gray-100"
               >
-                View All
-              </Link>
-            </div>
-            <div className="space-y-4">
-              {topRiders.map((rider, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium text-blue-600">
-                        {rider.name
-                          .split(' ')
-                          .map(n => n[0])
-                          .join('')}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">
-                        {rider.name}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {rider.deliveries} deliveries
-                      </p>
-                    </div>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {branch.name}
+                    </p>
+                    <p className="text-xs text-gray-500">{branch.location}</p>
                   </div>
-                  <div className="text-right">
-                    <div className="flex items-center space-x-1">
-                      <FiTrendingUp className="w-3 h-3 text-green-500" />
-                      <span className="text-sm font-medium text-gray-900">
-                        {rider.rating}
-                      </span>
-                    </div>
-                    <span
-                      className={`text-xs px-2 py-1 rounded-full ${
-                        rider.status === 'active'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}
-                    >
-                      {rider.status === 'active' ? 'Active' : 'On Break'}
-                    </span>
+                  <div className="text-sm text-gray-700">
+                    ⭐ {branch.rating}
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Quick Actions */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              Quick Actions
-            </h2>
-            <div className="space-y-3">
-              <Link
-                to="/admin/packages/new"
-                className="flex items-center space-x-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors group"
-              >
-                <FiPackage className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium text-blue-700">
-                  Add New Package
-                </span>
-              </Link>
-              <Link
-                to="/admin/riders/new"
-                className="flex items-center space-x-3 p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors group"
-              >
-                <FiUsers className="w-5 h-5 text-green-600" />
-                <span className="text-sm font-medium text-green-700">
-                  Register New Rider
-                </span>
-              </Link>
-              <Link
-                to="/admin/reports/delivery"
-                className="flex items-center space-x-3 p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors group"
-              >
-                <FiTrendingUp className="w-5 h-5 text-purple-600" />
-                <span className="text-sm font-medium text-purple-700">
-                  Generate Report
-                </span>
-              </Link>
-              <Link
-                to="/admin/branches"
-                className="flex items-center space-x-3 p-3 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors group"
-              >
-                <FiMapPin className="w-5 h-5 text-orange-600" />
-                <span className="text-sm font-medium text-orange-700">
-                  Manage Branches
-                </span>
-              </Link>
-            </div>
-          </div>
+                <div className="flex justify-between text-sm text-gray-600 mt-2">
+                  <span>{branch.packages} packages</span>
+                  <span>{branch.revenue}</span>
+                </div>
 
-          {/* System Status */}
-          {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              System Status
-            </h2>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">API Services</span>
-                <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                  Operational
-                </span>
+                <div
+                  className={`mt-2 inline-block text-xs px-2 py-1 rounded-full ${getStatusColor(
+                    branch.status
+                  )}`}
+                >
+                  {branch.growth} Growth
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Database</span>
-                <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                  Healthy
-                </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Activities */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <h2 className="font-semibold text-lg text-gray-900 mb-4">
+            Recent Activities
+          </h2>
+          <div className="space-y-3">
+            {recentActivities.map(a => (
+              <div
+                key={a.id}
+                className="flex items-start gap-3 hover:bg-gray-50 p-3 rounded-lg"
+              >
+                <div>{a.icon}</div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-900">{a.message}</p>
+                  <p className="text-xs text-gray-500">{a.time}</p>
+                </div>
+                <FiEye className="text-gray-400 w-4 h-4" />
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Payment Gateway</span>
-                <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                  Active
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">SMS Services</span>
-                <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">
-                  Maintenance
-                </span>
-              </div>
-            </div>
-          </div> */}
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <h2 className="font-semibold text-lg text-gray-900 mb-4">
+            Quick Actions
+          </h2>
+          <div className="space-y-3">
+            <Link
+              to="/admin/packages/new"
+              className="flex items-center gap-3 p-3 bg-blue-50 hover:bg-blue-100 rounded-lg"
+            >
+              <FiPackage className="text-blue-600" /> Add New Package
+            </Link>
+            <Link
+              to="/admin/riders/new"
+              className="flex items-center gap-3 p-3 bg-green-50 hover:bg-green-100 rounded-lg"
+            >
+              <FiUsers className="text-green-600" /> Register New Rider
+            </Link>
+            <Link
+              to="/admin/reports/delivery"
+              className="flex items-center gap-3 p-3 bg-purple-50 hover:bg-purple-100 rounded-lg"
+            >
+              <FiTrendingUp className="text-purple-600" /> Generate Report
+            </Link>
+            <Link
+              to="/admin/branches"
+              className="flex items-center gap-3 p-3 bg-orange-50 hover:bg-orange-100 rounded-lg"
+            >
+              <FiMapPin className="text-orange-600" /> Manage Branches
+            </Link>
+          </div>
         </div>
       </div>
     </div>

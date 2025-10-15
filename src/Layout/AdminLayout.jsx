@@ -38,8 +38,8 @@ const AdminLayout = () => {
         <Navbar toggleSidebar={toggleSidebar}></Navbar>
 
         {/* Outlet for child routes */}
-        <main className="flex-1 w-full p-4   overflow-y-auto">
-          <div className=" min-h-full overflow-y-scroll">
+        <main className="flex-1 w-full overflow-hidden">
+          <div className="h-full">
             <Outlet />
           </div>
         </main>
