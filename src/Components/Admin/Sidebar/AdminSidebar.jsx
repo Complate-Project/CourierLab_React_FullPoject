@@ -553,7 +553,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-gray-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
+        className={`bg-[#04052e] text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
@@ -618,7 +618,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
                     <AnimatePresence>
                       {isOpen && openMenu === item.name && (
                         <motion.ul
-                          className="bg-gray-900 ml-4 overflow-hidden"
+                          className="bg-[#0d0630] ml-4 overflow-hidden"
                           variants={submenuVariants}
                           initial="closed"
                           animate="open"

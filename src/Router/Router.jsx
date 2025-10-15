@@ -8,6 +8,8 @@ import BranchDashboard from '../Pages/Branch/Dashboard/BranchDashboard';
 import ExpenseType from '../Pages/Admin/Expense-type/ExpenseType';
 import CompanyInfo from '../Pages/Admin/Company-info/CompanyInfo';
 import Dashboard from '../Pages/Admin/Dashboard/Dashboard';
+import RiderLayout from '../Layout/RiderLayout';
+import Pickup from '../Pages/Rider/Pickup/pickup';
 
 export const router = createBrowserRouter([
   {
@@ -41,12 +43,22 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/rider/dashboard',
+    path: '/rider',
     element: (
       <ProtectedRoute allowedRoles={['rider']}>
-        <RiderDashboard />
+        <RiderLayout></RiderLayout>
       </ProtectedRoute>
     ),
+    children: [
+      {
+        path: '/rider/dashboard',
+        Component: RiderDashboard,
+      },
+      {
+        path: '/rider/pickup',
+        Component: Pickup,
+      },
+    ],
   },
   {
     path: '/branch/dashboard',

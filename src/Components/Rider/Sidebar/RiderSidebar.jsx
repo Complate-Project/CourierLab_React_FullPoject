@@ -10,10 +10,14 @@ import {
   FiTruck,
   FiClock,
   FiCheckCircle,
+  FiArrowUpCircle,
+  FiRefreshCw,
+  FiTrello,
+  FiBarChart2,
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const RiderSidebar = ({ isOpen, toggleSidebar }) => {
+const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
 
@@ -24,31 +28,59 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
   const isActive = path => location.pathname === path;
 
   const menuItems = [
-    { name: 'Dashboard', icon: <FiHome />, path: '/rider/dashboard' },
-    { name: 'Pickup Parcel', icon: <FiHome />, path: '/rider/pickup' },
-    { name: 'Auto Pick Up', icon: <FiHome />, path: '/rider/auto-pickup' },
-    { name: 'Delivery Parcel', icon: <FiHome />, path: '/rider/delivery' },
-    { name: 'Reschedule Order', icon: <FiHome />, path: '/rider/reschedule' },
-    { name: 'Transfer Order', icon: <FiHome />, path: '/rider/transfer' },
-    { name: 'Return Parcel', icon: <FiHome />, path: '/rider/return' },
+    {
+      name: 'Dashboard',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider/dashboard',
+    },
+    {
+      name: 'Pickup Parcel',
+      icon: <FiPackage className="w-5 h-5" />,
+      path: '/rider/pickup',
+    },
+    {
+      name: 'Auto Pick Up',
+      icon: <FiArrowUpCircle className="w-5 h-5" />,
+      path: '/rider/auto-pickup',
+    },
+    {
+      name: 'Delivery Parcel',
+      icon: <FiTruck className="w-5 h-5" />,
+      path: '/rider/delivery',
+    },
+    {
+      name: 'Reschedule Order',
+      icon: <FiRefreshCw className="w-5 h-5" />,
+      path: '/rider/reschedule',
+    },
+    {
+      name: 'Transfer Order',
+      icon: <FiTrello className="w-5 h-5" />,
+      path: '/rider/transfer',
+    },
+    {
+      name: 'Return Parcel',
+      icon: <FiPackage className="w-5 h-5" />,
+      path: '/rider/return',
+    },
     {
       name: 'Report',
-      icon: <FiPackage />,
+      icon: <FiBarChart2 className="w-5 h-5" />,
       submenu: [
         {
           name: 'Parcel History',
-          path: '/rider/deliveries/pending',
-          icon: <FiClock />,
+          path: '/rider/reports/parcel-history',
+          icon: <FiClock className="w-4 h-4" />,
         },
         {
           name: 'Transfer History',
-          path: '/rider/deliveries/transit',
-          icon: <FiTruck />,
+          path: '/rider/reports/transfer-history',
+          icon: <FiTruck className="w-4 h-4" />,
         },
         {
           name: 'Return History',
-          path: '/rider/deliveries/delivered',
-          icon: <FiCheckCircle />,
+          path: '/rider/reports/return-history',
+          icon: <FiCheckCircle className="w-4 h-4" />,
         },
       ],
     },
@@ -77,22 +109,20 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-green-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
+        className={`bg-[#00043a] text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
-        <div className="p-4 border-b border-green-700 flex justify-between items-center">
+        <div className="p-4 border-b border-slate-700 flex justify-between items-center">
           {isOpen ? (
             <>
               <div>
-                <h1 className="text-xl font-bold">Rider Panel</h1>
-                <p className="text-sm text-green-300">
-                  Courier Delivery System
-                </p>
+                <h1 className="text-xl font-bold text-white">Rider Panel</h1>
+                <p className="text-sm text-slate-300">Delivery Management</p>
               </div>
               <button
                 onClick={toggleSidebar}
-                className="text-green-300 hover:text-white lg:hidden"
+                className="text-slate-300 hover:text-white lg:hidden"
               >
                 <FiX className="h-6 w-6" />
               </button>
@@ -100,7 +130,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
           ) : (
             <button
               onClick={toggleSidebar}
-              className="text-green-300 hover:text-white"
+              className="text-slate-300 hover:text-white"
             >
               <FiUser className="h-6 w-6 text-white" />
             </button>
@@ -120,20 +150,22 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                         if (!isOpen) toggleSidebar();
                         toggleMenu(item.name);
                       }}
-                      className={`w-full flex items-center justify-between p-4 text-left hover:bg-green-700 transition-colors ${
-                        openMenu === item.name ? 'bg-green-700' : ''
+                      className={`w-full flex items-center justify-between p-4 text-left hover:bg-slate-700 transition-colors ${
+                        openMenu === item.name ? 'bg-slate-700' : ''
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        {item.icon}
-                        {isOpen && <span>{item.name}</span>}
+                        <span className="text-blue-400">{item.icon}</span>
+                        {isOpen && (
+                          <span className="text-slate-100">{item.name}</span>
+                        )}
                       </div>
                       {isOpen && (
                         <motion.div
                           variants={iconVariants}
                           animate={openMenu === item.name ? 'rotate' : 'normal'}
                         >
-                          <FiChevronDown className="w-4 h-4" />
+                          <FiChevronDown className="w-4 h-4 text-slate-400" />
                         </motion.div>
                       )}
                     </button>
@@ -142,7 +174,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                     <AnimatePresence>
                       {isOpen && openMenu === item.name && (
                         <motion.ul
-                          className="bg-green-900 ml-8 overflow-hidden"
+                          className="bg-slate-900 ml-6 overflow-hidden border-l border-slate-700"
                           variants={submenuVariants}
                           initial="closed"
                           animate="open"
@@ -161,16 +193,18 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                             >
                               <Link
                                 to={subItem.path}
-                                className={`flex items-center gap-2 px-4 py-3 text-sm hover:bg-green-700 transition-colors ${
+                                className={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-slate-700 transition-colors ${
                                   isActive(subItem.path)
-                                    ? 'bg-green-700 border-l-4 border-green-500'
+                                    ? 'bg-blue-600 border-l-4 border-blue-400'
                                     : ''
                                 }`}
                               >
-                                <span className="text-green-300">
+                                <span className="text-blue-300">
                                   {subItem.icon}
                                 </span>
-                                {subItem.name}
+                                <span className="text-slate-200">
+                                  {subItem.name}
+                                </span>
                               </Link>
                             </motion.li>
                           ))}
@@ -181,15 +215,17 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`flex items-center p-4 hover:bg-green-700 transition-colors ${
+                    className={`flex items-center p-4 hover:bg-slate-700 transition-colors ${
                       isActive(item.path)
-                        ? 'bg-green-700 border-l-4 border-green-500'
+                        ? 'bg-blue-600 border-l-4 border-blue-400'
                         : ''
                     }`}
                     onClick={!isOpen ? toggleSidebar : undefined}
                   >
-                    <span className="mr-3">{item.icon}</span>
-                    {isOpen && <span>{item.name}</span>}
+                    <span className="text-blue-400 mr-3">{item.icon}</span>
+                    {isOpen && (
+                      <span className="text-slate-100">{item.name}</span>
+                    )}
                   </Link>
                 )}
               </li>
@@ -197,11 +233,16 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
 
-        {/* Logout at Bottom */}
-        <div className="p-4 border-t border-green-700">
-          <button className="flex items-center text-red-300 hover:text-red-200 w-full p-2 hover:bg-green-700 rounded transition-colors">
-            <FiLogOut className="mr-3" />
-            <span>Logout</span>
+        {/* Logout Button */}
+        <div className="p-4 border-t border-slate-700">
+          <button
+            onClick={logout}
+            className={`flex items-center w-full p-3 hover:bg-slate-700 rounded-lg transition-colors text-red-400 hover:text-red-300 ${
+              !isOpen ? 'justify-center' : ''
+            }`}
+          >
+            <FiLogOut className="w-5 h-5" />
+            {isOpen && <span className="ml-3 font-medium">Logout</span>}
           </button>
         </div>
       </div>

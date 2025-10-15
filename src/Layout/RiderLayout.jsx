@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { useAuth } from '../Hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import RiderSidebar from '../Components/Rider/Sidebar/RiderSidebar';
-import { FiMenu, FiUser } from 'react-icons/fi';
+import Navbar from '../Components/Rider/Navbar/Navbar';
+import Footer from '../Shared/Footer/Footer';
 
-const RiderLayout = ({ children }) => {
-  const { logout, userRole } = useAuth();
+const RiderLayout = () => {
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { logout, userRole } = useAuth();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -20,17 +17,17 @@ const RiderLayout = ({ children }) => {
 
   // Security check
   if (userRole !== 'rider') {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-lg font-semibold">
-        Unauthorized Access
-      </div>
-    );
+    navigate('/login');
   }
 
   return (
-    <div className="min-h-screen flex bg-gray-100">
+    <div className="min-h-screen flex ">
       {/* Sidebar */}
-      <RiderSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <RiderSidebar
+        isOpen={sidebarOpen}
+        toggleSidebar={toggleSidebar}
+        logout={logout}
+      />
 
       {/* Main Content Area */}
       <div
@@ -39,42 +36,15 @@ const RiderLayout = ({ children }) => {
         }`}
       >
         {/* Navbar */}
-        <nav className="w-full bg-white shadow-md">
-          <div className="flex justify-between items-center px-6 py-4">
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={toggleSidebar}
-                className="text-gray-600 hover:text-gray-800 focus:outline-none"
-              >
-                <FiMenu className="h-6 w-6" />
-              </button>
-              <h1 className="text-xl font-bold text-gray-800">
-                Courier Service - Rider
-              </h1>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <FiUser className="h-6 w-6 text-gray-700" />
-              <span className="rounded-full bg-green-200 px-3 py-1 text-sm font-medium">
-                Rider
-              </span>
-              <button
-                onClick={handleLogout}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </nav>
+        <Navbar toggleSidebar={toggleSidebar}></Navbar>
 
         {/* Main Content (Outlet) */}
-        <main className="flex-1 w-full bg-gray-50 p-6 overflow-y-auto">
-          <div className="bg-white shadow rounded-xl p-6 min-h-full">
-            {children}
+        <main className="flex-1 w-full  overflow-y-auto">
+          <div className="bg-gray-50 shadow rounded-xl p-6 min-h-full">
+            <Outlet></Outlet>
           </div>
         </main>
-        <p className="text-2xl text-center bg-green-800">Footer</p>
+        <Footer></Footer>
       </div>
     </div>
   );

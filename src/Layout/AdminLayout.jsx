@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
 import AdminSidebar from '../Components/Admin/Sidebar/AdminSidebar';
 import Navbar from '../Components/Admin/Navbar/Navbar';
-import Footer from '../Components/Admin/Footer/Footer';
+import Footer from '../Shared/Footer/Footer';
 
 const AdminLayout = () => {
   const { logout, userRole } = useAuth();

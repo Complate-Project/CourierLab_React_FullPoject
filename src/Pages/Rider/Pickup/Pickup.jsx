@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Navbar = () => {
+const Pickup = () => {
   return (
     <div>
-      <p>Navbar</p>
+      <p>pickup</p>
     </div>
   );
 };
 
-export default Navbar;
+export default Pickup;
