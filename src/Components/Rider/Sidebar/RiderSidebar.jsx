@@ -34,63 +34,56 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
       path: '/rider/dashboard',
     },
     {
-      name: 'Route Planning',
+      name: 'Pickup Parcel ',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider/#',
+    },
+    {
+      name: 'Auto Pick Up ',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider',
+    },
+    {
+      name: 'Delivery Parcel ',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider',
+    },
+    {
+      name: 'Reschedule Order',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider',
+    },
+    {
+      name: 'Transfer Order ',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider',
+    },
+    {
+      name: 'Return Parcel ',
+      icon: <FiHome className="w-5 h-5" />,
+      path: '/rider',
+    },
+
+    {
+      name: 'Report',
       icon: <FiPackage className="w-5 h-5" />,
       submenu: [
         {
-          name: 'Pending Deliveries',
+          name: 'Parcel History',
           path: '/rider/deliveries/pending',
           icon: <FiClock className="w-4 h-4" />,
         },
         {
-          name: 'In Transit',
+          name: 'Transfer History',
           path: '/rider/deliveries/transit',
           icon: <FiTruck className="w-4 h-4" />,
         },
         {
-          name: 'Delivered',
+          name: 'Return History',
           path: '/rider/deliveries/delivered',
           icon: <FiCheckCircle className="w-4 h-4" />,
         },
-        {
-          name: 'Failed Attempts',
-          path: '/rider/deliveries/failed',
-          icon: <FiAlertCircle className="w-4 h-4" />,
-        },
       ],
-    },
-
-    {
-      name: 'My Deliveries',
-      icon: <FiPackage className="w-5 h-5" />,
-      submenu: [
-        {
-          name: 'Pending Deliveries',
-          path: '/rider/deliveries/pending',
-          icon: <FiClock className="w-4 h-4" />,
-        },
-        {
-          name: 'In Transit',
-          path: '/rider/deliveries/transit',
-          icon: <FiTruck className="w-4 h-4" />,
-        },
-        {
-          name: 'Delivered',
-          path: '/rider/deliveries/delivered',
-          icon: <FiCheckCircle className="w-4 h-4" />,
-        },
-        {
-          name: 'Failed Attempts',
-          path: '/rider/deliveries/failed',
-          icon: <FiAlertCircle className="w-4 h-4" />,
-        },
-      ],
-    },
-
-    {
-      name: 'Settings',
-      icon: <FiSettings className="w-5 h-5" />,
-      path: '/rider/settings',
     },
   ];
 

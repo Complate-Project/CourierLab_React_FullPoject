@@ -41,73 +41,163 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
       path: '/branch/dashboard',
     },
     {
-      name: 'Packages',
+      name: 'Staff Management',
+      icon: <FiUsers className="w-5 h-5" />,
+      submenu: [
+        {
+          name: 'Rider ',
+          path: '/branch/staff/riders',
+          icon: <FiTruck />,
+        },
+        {
+          name: 'In Charge',
+          path: '/branch/staff/support',
+          icon: <FiUserCheck />,
+        },
+      ],
+    },
+    {
+      name: 'Parcel Management',
       icon: <FiPackage className="w-5 h-5" />,
       submenu: [
         {
-          name: 'Incoming Packages',
+          name: 'Consignments',
           path: '/branch/packages/incoming',
           icon: <FiDownload />,
         },
         {
-          name: 'Outgoing Packages',
+          name: 'Add Parcel',
           path: '/branch/packages/outgoing',
           icon: <FiUpload />,
         },
         {
-          name: 'Add New Package',
+          name: 'Bulk Import',
           path: '/branch/packages/new',
           icon: <FiPlusSquare />,
         },
         {
-          name: 'Track Package',
+          name: 'Order Export',
           path: '/branch/packages/track',
           icon: <FiSearch />,
         },
       ],
     },
     {
-      name: 'Staff Management',
-      icon: <FiUsers className="w-5 h-5" />,
+      name: 'Operation',
+      icon: <FiPackage className="w-5 h-5" />,
       submenu: [
-        { name: 'Riders', path: '/branch/staff/riders', icon: <FiTruck /> },
         {
-          name: 'Support Staff',
-          path: '/branch/staff/support',
-          icon: <FiUserCheck />,
+          name: 'Consignments Request',
+          path: '/branch/packages/incoming',
+          icon: <FiDownload />,
         },
         {
-          name: 'Add New Staff',
-          path: '/branch/staff/new',
-          icon: <FiUserPlus />,
+          name: 'Consignments Receive',
+          path: '/branch/packages/outgoing',
+          icon: <FiUpload />,
+        },
+        {
+          name: 'Transit Parcel',
+          path: '/branch/packages/new',
+          icon: <FiPlusSquare />,
+        },
+        {
+          name: 'Destination Hub',
+          path: '/branch/packages/track',
+          icon: <FiSearch />,
+        },
+        {
+          name: 'Delivery Parcel',
+          path: '/branch/packages/track',
+          icon: <FiSearch />,
+        },
+        {
+          name: 'Collect Amount Rider',
+          path: '/branch/packages/track',
+          icon: <FiSearch />,
+        },
+
+        {
+          name: 'Return Processing',
+          path: '/branch/packages/track',
+          icon: <FiSearch />,
+        },
+        {
+          name: 'Reschedule Parcel',
+          path: '/branch/packages/track',
+          icon: <FiSearch />,
         },
       ],
     },
+    {
+      name: 'Payment Processing',
+      icon: <FiPackage className="w-5 h-5" />,
+      submenu: [
+        {
+          name: 'Collection Amount',
+          path: '/branch/packages/incoming',
+          icon: <FiDownload />,
+        },
+        {
+          name: 'Payment Amount',
+          path: '/branch/packages/outgoing',
+          icon: <FiUpload />,
+        },
+      ],
+    },
+
+    {
+      name: 'Parcel Re Assign',
+      icon: <FiPackage className="w-5 h-5" />,
+      submenu: [
+        {
+          name: 'Pickup Re Assign',
+          path: '/branch/packages/incoming',
+          icon: <FiDownload />,
+        },
+        {
+          name: 'Delivery Re Assign',
+          path: '/branch/packages/outgoing',
+          icon: <FiUpload />,
+        },
+        {
+          name: 'Hub Fulfillment',
+          path: '/branch/packages/new',
+          icon: <FiPlusSquare />,
+        },
+      ],
+    },
+
     {
       name: 'Reports',
       icon: <FiBarChart2 className="w-5 h-5" />,
       submenu: [
         {
-          name: 'Daily Reports',
+          name: 'Rider History',
           path: '/branch/reports/daily',
           icon: <FiFileText />,
         },
         {
-          name: 'Inventory Reports',
+          name: 'Transaction History',
           path: '/branch/reports/inventory',
           icon: <FiBox />,
         },
         {
-          name: 'Financial Reports',
+          name: 'Rider Collect History',
+          path: '/branch/reports/financial',
+          icon: <FiDollarSign />,
+        },
+        {
+          name: 'Transfer History',
+          path: '/branch/reports/financial',
+          icon: <FiDollarSign />,
+        },
+        {
+          name: 'Return History',
           path: '/branch/reports/financial',
           icon: <FiDollarSign />,
         },
       ],
-    },
-    {
-      name: 'Settings',
-      icon: <FiSettings className="w-5 h-5" />,
-      path: '/branch/settings',
     },
   ];
 

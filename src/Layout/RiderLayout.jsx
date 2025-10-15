@@ -72,6 +72,7 @@ const RiderLayout = ({ children }) => {
         <main className="flex-1 w-full bg-gray-50 p-6">
           <div className="bg-white shadow rounded-xl p-6">{children}</div>
         </main>
+        <p className="text-2xl text-center bg-green-800">Footer</p>
       </div>
     </div>
   );
