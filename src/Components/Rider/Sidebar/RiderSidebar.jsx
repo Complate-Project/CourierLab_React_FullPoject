@@ -3,17 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   FiHome,
   FiPackage,
-  FiMap,
   FiUser,
-  FiSettings,
   FiLogOut,
   FiChevronDown,
-  FiChevronRight,
   FiX,
   FiTruck,
   FiClock,
   FiCheckCircle,
-  FiAlertCircle,
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -28,100 +24,45 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
   const isActive = path => location.pathname === path;
 
   const menuItems = [
-    {
-      name: 'Dashboard',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider/dashboard',
-    },
-    {
-      name: 'Pickup Parcel ',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider/#',
-    },
-    {
-      name: 'Auto Pick Up ',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider',
-    },
-    {
-      name: 'Delivery Parcel ',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider',
-    },
-    {
-      name: 'Reschedule Order',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider',
-    },
-    {
-      name: 'Transfer Order ',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider',
-    },
-    {
-      name: 'Return Parcel ',
-      icon: <FiHome className="w-5 h-5" />,
-      path: '/rider',
-    },
-
+    { name: 'Dashboard', icon: <FiHome />, path: '/rider/dashboard' },
+    { name: 'Pickup Parcel', icon: <FiHome />, path: '/rider/pickup' },
+    { name: 'Auto Pick Up', icon: <FiHome />, path: '/rider/auto-pickup' },
+    { name: 'Delivery Parcel', icon: <FiHome />, path: '/rider/delivery' },
+    { name: 'Reschedule Order', icon: <FiHome />, path: '/rider/reschedule' },
+    { name: 'Transfer Order', icon: <FiHome />, path: '/rider/transfer' },
+    { name: 'Return Parcel', icon: <FiHome />, path: '/rider/return' },
     {
       name: 'Report',
-      icon: <FiPackage className="w-5 h-5" />,
+      icon: <FiPackage />,
       submenu: [
         {
           name: 'Parcel History',
           path: '/rider/deliveries/pending',
-          icon: <FiClock className="w-4 h-4" />,
+          icon: <FiClock />,
         },
         {
           name: 'Transfer History',
           path: '/rider/deliveries/transit',
-          icon: <FiTruck className="w-4 h-4" />,
+          icon: <FiTruck />,
         },
         {
-          name: 'Return History',
+          name: 'Return History',
           path: '/rider/deliveries/delivered',
-          icon: <FiCheckCircle className="w-4 h-4" />,
+          icon: <FiCheckCircle />,
         },
       ],
     },
   ];
 
-  // Animation variants for smoother transitions
+  // Animation variants
   const submenuVariants = {
-    closed: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        duration: 0.2,
-        ease: 'easeInOut',
-      },
-    },
-    open: {
-      opacity: 1,
-      height: 'auto',
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-      },
-    },
+    closed: { opacity: 0, height: 0, transition: { duration: 0.2 } },
+    open: { opacity: 1, height: 'auto', transition: { duration: 0.3 } },
   };
 
   const iconVariants = {
-    rotate: {
-      rotate: 180,
-      transition: {
-        duration: 0.2,
-        ease: 'easeInOut',
-      },
-    },
-    normal: {
-      rotate: 0,
-      transition: {
-        duration: 0.2,
-        ease: 'easeInOut',
-      },
-    },
+    rotate: { rotate: 180, transition: { duration: 0.2 } },
+    normal: { rotate: 0, transition: { duration: 0.2 } },
   };
 
   return (
@@ -131,14 +72,15 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
-        ></div>
+        />
       )}
 
       {/* Sidebar */}
       <div
-        className={`bg-green-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out overflow-y-auto
+        className={`bg-green-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
+        {/* Header */}
         <div className="p-4 border-b border-green-700 flex justify-between items-center">
           {isOpen ? (
             <>
@@ -165,7 +107,8 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
           )}
         </div>
 
-        <nav className="mt-4">
+        {/* Scrollable Navigation */}
+        <nav className="flex-1 overflow-y-auto mt-4">
           <ul>
             {menuItems.map((item, index) => (
               <li key={index} className="mb-1">
@@ -181,8 +124,8 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                         openMenu === item.name ? 'bg-green-700' : ''
                       }`}
                     >
-                      <div className="flex items-center">
-                        <span className="mr-3">{item.icon}</span>
+                      <div className="flex items-center gap-3">
+                        {item.icon}
                         {isOpen && <span>{item.name}</span>}
                       </div>
                       {isOpen && (
@@ -195,7 +138,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                       )}
                     </button>
 
-                    {/* Submenu with improved animation */}
+                    {/* Submenu */}
                     <AnimatePresence>
                       {isOpen && openMenu === item.name && (
                         <motion.ul
@@ -206,7 +149,16 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                           exit="closed"
                         >
                           {item.submenu.map((subItem, subIndex) => (
-                            <li key={subIndex}>
+                            <motion.li
+                              key={subIndex}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: -20 }}
+                              transition={{
+                                duration: 0.2,
+                                delay: subIndex * 0.05,
+                              }}
+                            >
                               <Link
                                 to={subItem.path}
                                 className={`flex items-center gap-2 px-4 py-3 text-sm hover:bg-green-700 transition-colors ${
@@ -220,7 +172,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
                                 </span>
                                 {subItem.name}
                               </Link>
-                            </li>
+                            </motion.li>
                           ))}
                         </motion.ul>
                       )}
@@ -245,14 +197,13 @@ const RiderSidebar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
 
-        {isOpen && (
-          <div className="absolute bottom-0 w-full p-4 border-t border-green-700">
-            <button className="flex items-center text-red-300 hover:text-red-200 w-full p-2 hover:bg-green-700 rounded transition-colors">
-              <FiLogOut className="mr-3" />
-              <span>Logout</span>
-            </button>
-          </div>
-        )}
+        {/* Logout at Bottom */}
+        <div className="p-4 border-t border-green-700">
+          <button className="flex items-center text-red-300 hover:text-red-200 w-full p-2 hover:bg-green-700 rounded transition-colors">
+            <FiLogOut className="mr-3" />
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </>
   );

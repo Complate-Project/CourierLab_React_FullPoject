@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaStore } from 'react-icons/fa6';
 import {
   FiHome,
   FiUsers,
   FiPackage,
-  FiBarChart2,
   FiSettings,
   FiLogOut,
   FiChevronDown,
@@ -38,11 +36,11 @@ import {
   FiCreditCard,
   FiArchive,
 } from 'react-icons/fi';
-
-import { motion, AnimatePresence } from 'framer-motion';
+import { FaStore } from 'react-icons/fa6';
 import { LiaFileInvoiceSolid } from 'react-icons/lia';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const AdminSidebar = ({ isOpen, toggleSidebar }) => {
+const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
 
@@ -476,7 +474,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
           icon: <FiTrendingUp />,
         },
         {
-          name: 'Income & Expense Summary Report',
+          name: 'Income & Expense Summary ',
           path: '/admin/reports/income-expense-summary',
           icon: <FiTrendingUp />,
         },
@@ -519,27 +517,43 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
     },
   ];
 
+  // Submenu animation
   const submenuVariants = {
     closed: { opacity: 0, height: 0, transition: { duration: 0.2 } },
-    open: { opacity: 1, height: 'auto', transition: { duration: 0.3 } },
+    open: {
+      opacity: 1,
+      height: 'auto',
+      transition: {
+        duration: 0.3,
+        when: 'beforeChildren',
+        staggerChildren: 0.05,
+      },
+    },
   };
 
-  const iconVariants = {
-    rotate: { rotate: 180, transition: { duration: 0.2 } },
-    normal: { rotate: 0, transition: { duration: 0.2 } },
+  const itemVariants = {
+    closed: { opacity: 0, x: -20 },
+    open: { opacity: 1, x: 0 },
+  };
+
+  const rotateVariants = {
+    open: { rotate: 180, transition: { duration: 0.2 } },
+    closed: { rotate: 0, transition: { duration: 0.2 } },
   };
 
   return (
     <>
+      {/* Overlay for small screens */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
-        ></div>
+        />
       )}
 
+      {/* Sidebar */}
       <div
-        className={`bg-gray-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out overflow-y-auto
+        className={`bg-gray-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
@@ -564,18 +578,19 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
               onClick={toggleSidebar}
               className="text-gray-400 hover:text-white"
             >
-              <FiUser className="h-6 w-6 text-white" />
+              <FiUsers className="h-6 w-6 text-white" />
             </button>
           )}
         </div>
 
         {/* Navigation */}
-        <nav className="mt-4">
+        <nav className="flex-1 overflow-y-auto mt-4">
           <ul>
-            {menuItems.map((item, index) => (
-              <li key={index} className="mb-1">
+            {menuItems.map((item, idx) => (
+              <li key={idx} className="mb-1">
                 {item.submenu ? (
                   <>
+                    {/* Parent Button */}
                     <button
                       onClick={() => {
                         if (!isOpen) toggleSidebar();
@@ -585,45 +600,46 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
                         openMenu === item.name ? 'bg-gray-700' : ''
                       }`}
                     >
-                      <div className="flex items-center">
-                        <span className="mr-3">{item.icon}</span>
+                      <div className="flex items-center gap-3">
+                        {item.icon}
                         {isOpen && <span>{item.name}</span>}
                       </div>
                       {isOpen && (
                         <motion.div
-                          variants={iconVariants}
-                          animate={openMenu === item.name ? 'rotate' : 'normal'}
+                          variants={rotateVariants}
+                          animate={openMenu === item.name ? 'open' : 'closed'}
                         >
                           <FiChevronDown className="w-4 h-4" />
                         </motion.div>
                       )}
                     </button>
 
+                    {/* Submenu */}
                     <AnimatePresence>
                       {isOpen && openMenu === item.name && (
                         <motion.ul
-                          className="bg-gray-900  overflow-hidden"
+                          className="bg-gray-900 ml-4 overflow-hidden"
                           variants={submenuVariants}
                           initial="closed"
                           animate="open"
                           exit="closed"
                         >
-                          {item.submenu.map((subItem, subIndex) => (
-                            <li key={subIndex}>
+                          {item.submenu.map((sub, i) => (
+                            <motion.li key={i} variants={itemVariants}>
                               <Link
-                                to={subItem.path}
+                                to={sub.path}
                                 className={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-700 transition-colors ${
-                                  isActive(subItem.path)
+                                  isActive(sub.path)
                                     ? 'bg-gray-700 border-l-4 border-blue-500'
                                     : ''
                                 }`}
                               >
                                 <span className="text-gray-400">
-                                  {subItem.icon}
+                                  {sub.icon}
                                 </span>
-                                {subItem.name}
+                                {sub.name}
                               </Link>
-                            </li>
+                            </motion.li>
                           ))}
                         </motion.ul>
                       )}
@@ -648,15 +664,16 @@ const AdminSidebar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
 
-        {/* Logout */}
-        {isOpen && (
-          <div className="absolute bottom-0 w-full p-4 border-t border-gray-700">
-            <button className="flex items-center text-red-400 hover:text-red-300 w-full p-2 hover:bg-gray-700 rounded transition-colors">
-              <FiLogOut className="mr-3" />
-              <span>Logout</span>
-            </button>
-          </div>
-        )}
+        {/* Logout Button */}
+        <div className="p-4 border-t border-gray-700">
+          <button
+            onClick={logout}
+            className="flex items-center text-red-400 hover:text-red-300 w-full p-2 hover:bg-gray-700 rounded transition-colors"
+          >
+            <FiLogOut className="mr-3" />
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </>
   );

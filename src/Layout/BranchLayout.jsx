@@ -69,8 +69,10 @@ const BranchLayout = ({ children }) => {
         </nav>
 
         {/* Main Content (Outlet) */}
-        <main className="flex-1 w-full bg-gray-50 p-6">
-          <div className="bg-white shadow rounded-xl p-6">{children}</div>
+        <main className="flex-1 w-full bg-gray-50 p-6 overflow-y-auto">
+          <div className="bg-white shadow rounded-xl p-6 min-h-full">
+            {children}
+          </div>
         </main>
       </div>
     </div>

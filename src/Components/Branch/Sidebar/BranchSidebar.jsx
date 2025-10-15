@@ -16,11 +16,9 @@ import {
   FiSearch,
   FiTruck,
   FiUserCheck,
-  FiUserPlus,
   FiFileText,
   FiBox,
   FiDollarSign,
-  FiClipboard,
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -201,7 +199,6 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
     },
   ];
 
-  // Animation variants
   const submenuVariants = {
     closed: { opacity: 0, height: 0, transition: { duration: 0.2 } },
     open: { opacity: 1, height: 'auto', transition: { duration: 0.3 } },
@@ -214,17 +211,15 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
 
   return (
     <>
-      {/* Overlay for mobile */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
-        ></div>
+        />
       )}
 
-      {/* Sidebar */}
       <div
-        className={`bg-yellow-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out overflow-y-auto
+        className={`bg-yellow-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
@@ -254,8 +249,8 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
           )}
         </div>
 
-        {/* Navigation */}
-        <nav className="mt-4">
+        {/* Scrollable Navigation */}
+        <nav className="flex-1 overflow-y-auto mt-4">
           <ul>
             {menuItems.map((item, index) => (
               <li key={index} className="mb-1">
@@ -342,15 +337,13 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
 
-        {/* Logout */}
-        {isOpen && (
-          <div className="absolute bottom-0 w-full p-4 border-t border-yellow-700">
-            <button className="flex items-center text-red-300 hover:text-red-200 w-full p-2 hover:bg-yellow-700 rounded transition-colors">
-              <FiLogOut className="mr-3" />
-              <span>Logout</span>
-            </button>
-          </div>
-        )}
+        {/* Logout Button Always at Bottom */}
+        <div className="p-4 border-t border-yellow-700">
+          <button className="flex items-center text-red-300 hover:text-red-200 w-full p-2 hover:bg-yellow-700 rounded transition-colors">
+            <FiLogOut className="mr-3" />
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </>
   );
