@@ -19,6 +19,8 @@ import {
   FiFileText,
   FiBox,
   FiDollarSign,
+  FiActivity,
+  FiCreditCard,
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -60,85 +62,85 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
       submenu: [
         {
           name: 'Consignments',
-          path: '/branch/packages/incoming',
+          path: '/branch/dashboard/consignments',
           icon: <FiDownload />,
         },
         {
           name: 'Add Parcel',
-          path: '/branch/packages/outgoing',
+          path: '/branch/dashboard/add-parcel',
           icon: <FiUpload />,
         },
         {
           name: 'Bulk Import',
-          path: '/branch/packages/new',
+          path: '/branch/dashboard/bulk-import',
           icon: <FiPlusSquare />,
         },
         {
           name: 'Order Export',
-          path: '/branch/packages/track',
+          path: '/branch/dashboard/order-export',
           icon: <FiSearch />,
         },
       ],
     },
     {
       name: 'Operation',
-      icon: <FiPackage className="w-5 h-5" />,
+      icon: <FiActivity className="w-5 h-5" />,
       submenu: [
         {
           name: 'Consignments Request',
-          path: '/branch/packages/incoming',
+          path: '/branch/dashboard/consignments-request',
           icon: <FiDownload />,
         },
         {
           name: 'Consignments Receive',
-          path: '/branch/packages/outgoing',
+          path: '/branch/dashboard/consignments-receive',
           icon: <FiUpload />,
         },
         {
           name: 'Transit Parcel',
-          path: '/branch/packages/new',
+          path: '/branch/dashboard/transit-parcel',
           icon: <FiPlusSquare />,
         },
         {
           name: 'Destination Hub',
-          path: '/branch/packages/track',
+          path: '/branch/dashboard/destination-hub',
           icon: <FiSearch />,
         },
         {
           name: 'Delivery Parcel',
-          path: '/branch/packages/track',
+          path: '/branch/dashboard/delivery-parcel',
           icon: <FiSearch />,
         },
         {
           name: 'Collect Amount Rider',
-          path: '/branch/packages/track',
+          path: '/branch/dashboard/collect-amount-rider',
           icon: <FiSearch />,
         },
 
         {
           name: 'Return Processing',
-          path: '/branch/packages/track',
+          path: '/branch/dashboard/return-processing',
           icon: <FiSearch />,
         },
         {
-          name: 'Reschedule Parcel',
-          path: '/branch/packages/track',
+          name: 'Reschedule Parcel',
+          path: '/branch/dashboard/reschedule-parcel',
           icon: <FiSearch />,
         },
       ],
     },
     {
       name: 'Payment Processing',
-      icon: <FiPackage className="w-5 h-5" />,
+      icon: <FiCreditCard className="w-5 h-5" />,
       submenu: [
         {
           name: 'Collection Amount',
-          path: '/branch/packages/incoming',
+          path: '/branch/dashboard/collection-amount',
           icon: <FiDownload />,
         },
         {
           name: 'Payment Amount',
-          path: '/branch/packages/outgoing',
+          path: '/branch/dashboard/payment-amount',
           icon: <FiUpload />,
         },
       ],
@@ -146,21 +148,21 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
 
     {
       name: 'Parcel Re Assign',
-      icon: <FiPackage className="w-5 h-5" />,
+      icon: <FiTruck className="w-5 h-5" />,
       submenu: [
         {
           name: 'Pickup Re Assign',
-          path: '/branch/packages/incoming',
+          path: '/branch/dashboard/pickup-re-assign',
           icon: <FiDownload />,
         },
         {
           name: 'Delivery Re Assign',
-          path: '/branch/packages/outgoing',
+          path: '/branch/dashboard/delivery-re-assign',
           icon: <FiUpload />,
         },
         {
           name: 'Hub Fulfillment',
-          path: '/branch/packages/new',
+          path: '/branch/dashboard/hub-fulfillment',
           icon: <FiPlusSquare />,
         },
       ],
@@ -172,27 +174,27 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
       submenu: [
         {
           name: 'Rider History',
-          path: '/branch/reports/daily',
+          path: '/branch/dashboard/rider-history',
           icon: <FiFileText />,
         },
         {
           name: 'Transaction History',
-          path: '/branch/reports/inventory',
+          path: '/branch/dashboard/transaction-history',
           icon: <FiBox />,
         },
         {
           name: 'Rider Collect History',
-          path: '/branch/reports/financial',
+          path: '/branch/dashboard/rider-collect-history',
           icon: <FiDollarSign />,
         },
         {
           name: 'Transfer History',
-          path: '/branch/reports/financial',
+          path: '/branch/dashboard/transfer-history',
           icon: <FiDollarSign />,
         },
         {
-          name: 'Return History',
-          path: '/branch/reports/financial',
+          name: 'Return History',
+          path: '/branch/dashboard/return-history',
           icon: <FiDollarSign />,
         },
       ],
@@ -228,13 +230,11 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
             <>
               <div>
                 <h1 className="text-xl font-bold">Branch Panel</h1>
-                <p className="text-sm text-yellow-300">
-                  Courier Branch Management
-                </p>
+                <p className="text-sm text-white">Courier Branch Management</p>
               </div>
               <button
                 onClick={toggleSidebar}
-                className="text-yellow-300 hover:text-white lg:hidden"
+                className="text-white hover:text-white lg:hidden"
               >
                 <FiX className="h-6 w-6" />
               </button>
@@ -242,7 +242,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
           ) : (
             <button
               onClick={toggleSidebar}
-              className="text-yellow-300 hover:text-white"
+              className="text-white hover:text-white"
             >
               <FiUser className="h-6 w-6 text-white" />
             </button>
@@ -262,7 +262,9 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
                         toggleMenu(item.name);
                       }}
                       className={`w-full flex items-center justify-between p-4 text-left hover:bg-[#4361ee] transition-colors ${
-                        openMenu === item.name ? 'bg-[#4361ee]' : ''
+                        openMenu === item.name
+                          ? 'bg-[#4361ee] border-l-4 border-white'
+                          : ''
                       }`}
                     >
                       <div className="flex items-center">
@@ -282,7 +284,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
                     <AnimatePresence>
                       {isOpen && openMenu === item.name && (
                         <motion.ul
-                          className="bg-[#002855] ml-8 overflow-hidden"
+                          className="bg-[#002855] ml-4 overflow-hidden"
                           variants={submenuVariants}
                           initial="closed"
                           animate="open"
@@ -303,7 +305,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
                                 to={subItem.path}
                                 className={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-[#4361ee] transition-colors ${
                                   isActive(subItem.path)
-                                    ? 'bg-[#4361ee] border-l-4 border-[#4361ee]'
+                                    ? 'bg-[#4361ee] border-l-4 border-white'
                                     : ''
                                 }`}
                               >
@@ -323,7 +325,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
                     to={item.path}
                     className={`flex items-center p-4 hover:bg-[#4361ee] transition-colors ${
                       isActive(item.path)
-                        ? 'bg-[#4361ee] border-l-4 border-[#788bff]'
+                        ? 'bg-[#4361ee] border-l-4 border-white'
                         : ''
                     }`}
                     onClick={!isOpen ? toggleSidebar : undefined}

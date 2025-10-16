@@ -1,8 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Login from '../Pages/Login/Login';
-import ProtectedRoute from '../Components/ProtectedRoute';
+import ProtectedRoute from '../Contexts/ProtectedRoute';
 import AdminLayout from '../Layout/AdminLayout';
-
 import RiderDashboard from '../Pages/Rider/Dashboard/RiderDashboard';
 import BranchDashboard from '../Pages/Branch/Dashboard/BranchDashboard';
 import ExpenseType from '../Pages/Admin/Expense-type/ExpenseType';
@@ -13,6 +12,28 @@ import Pickup from '../Pages/Rider/Pickup/pickup';
 import BranchLayout from '../Layout/BranchLayout';
 import Rider from '../Pages/Branch/Rider/Rider';
 import InCharge from '../Pages/Branch/In-Charge/InCharge';
+import Consignments from '../Pages/Branch/Consignments/Consignments';
+import AddParcel from '../Pages/Branch/Add-Parcel/AddParcel';
+import BulkImport from '../Pages/Branch/Bulk-Import/BulkImport';
+import OrderExport from '../Pages/Branch/Order-Export/OrderExport';
+import ConsignmentsRequest from '../Pages/Branch/Consignments-Request/ConsignmentsRequest';
+import ConsignmentsReceive from '../Pages/Branch/Consignments-Receive/ConsignmentsReceive';
+import TransitParcel from '../Pages/Branch/Transit-Parcel/TransitParcel';
+import DestinationHub from '../Pages/Branch/Destination-Hub/DestinationHub';
+import DeliveryParcel from '../Pages/Branch/Delivery-Parcel/DeliveryParcel';
+import CollectAmountRider from '../Pages/Branch/Collect-Amount-Rider/CollectAmountRider';
+import ReturnProcessing from '../Pages/Branch/Return-Processing/ReturnProcessing';
+import RescheduleParcel from '../Pages/Branch/Reschedule-Parcel/RescheduleParcel';
+import CollectionAmount from '../Pages/Branch/Collection-Amount/CollectionAmount';
+import PaymentAmount from '../Pages/Branch/Payment-Amount/PaymentAmount';
+import PickupReAssign from '../Pages/Branch/Pickup-Re-Assign/PickupReAssign';
+import DeliveryReAssign from '../Pages/Branch/Delivery-Re-Assign/DeliveryReAssign';
+import HubFulfillment from '../Pages/Branch/Hub-Fulfillment/HubFulfillment';
+import ReturnHistory from '../Pages/Branch/Return-History/ReturnHistory';
+import TransferHistory from '../Pages/Branch/Transfer-History/TransferHistory';
+import RiderCollectHistory from '../Pages/Branch/Rider-Collect-History/RiderCollectHistory';
+import TransactionHistory from '../Pages/Branch/Transaction-History/TransactionHistory';
+import RiderHistory from '../Pages/Branch/Rider-History/RiderHistory';
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +103,94 @@ export const router = createBrowserRouter([
       {
         path: '/branch/dashboard/in-charge',
         element: <InCharge />,
+      },
+      {
+        path: '/branch/dashboard/consignments',
+        element: <Consignments />,
+      },
+      {
+        path: '/branch/dashboard/add-parcel',
+        element: <AddParcel />,
+      },
+      {
+        path: '/branch/dashboard/bulk-import',
+        element: <BulkImport />,
+      },
+      {
+        path: '/branch/dashboard/order-export',
+        element: <OrderExport />,
+      },
+      {
+        path: '/branch/dashboard/consignments-request',
+        element: <ConsignmentsRequest />,
+      },
+      {
+        path: '/branch/dashboard/consignments-receive',
+        element: <ConsignmentsReceive />,
+      },
+      {
+        path: '/branch/dashboard/transit-parcel',
+        element: <TransitParcel />,
+      },
+      {
+        path: '/branch/dashboard/destination-hub',
+        element: <DestinationHub />,
+      },
+      {
+        path: '/branch/dashboard/delivery-parcel',
+        element: <DeliveryParcel />,
+      },
+      {
+        path: '/branch/dashboard/collect-amount-rider',
+        element: <CollectAmountRider />,
+      },
+      {
+        path: '/branch/dashboard/return-processing',
+        element: <ReturnProcessing />,
+      },
+      {
+        path: '/branch/dashboard/reschedule-parcel',
+        element: <RescheduleParcel />,
+      },
+      {
+        path: '/branch/dashboard/collection-amount',
+        element: <CollectionAmount />,
+      },
+      {
+        path: '/branch/dashboard/payment-amount',
+        element: <PaymentAmount />,
+      },
+      {
+        path: '/branch/dashboard/pickup-re-assign',
+        element: <PickupReAssign />,
+      },
+      {
+        path: '/branch/dashboard/delivery-re-assign',
+        element: <DeliveryReAssign />,
+      },
+      {
+        path: '/branch/dashboard/hub-fulfillment',
+        element: <HubFulfillment />,
+      },
+      {
+        path: '/branch/dashboard/rider-history',
+        element: <RiderHistory />,
+      },
+      {
+        path: '/branch/dashboard/transaction-history',
+        element: <TransactionHistory />,
+      },
+      {
+        path: '/branch/dashboard/rider-collect-history',
+        element: <RiderCollectHistory />,
+      },
+      {
+        path: '/branch/dashboard/transfer-history',
+        element: <TransferHistory />,
+      },
+      {
+        path: '/branch/dashboard/return-history',
+        element: <ReturnHistory />,
       },
     ],
   },
