@@ -10,6 +10,9 @@ import CompanyInfo from '../Pages/Admin/Company-info/CompanyInfo';
 import Dashboard from '../Pages/Admin/Dashboard/Dashboard';
 import RiderLayout from '../Layout/RiderLayout';
 import Pickup from '../Pages/Rider/Pickup/pickup';
+import BranchLayout from '../Layout/BranchLayout';
+import Rider from '../Pages/Branch/Rider/Rider';
+import InCharge from '../Pages/Branch/In-Charge/InCharge';
 
 export const router = createBrowserRouter([
   {
@@ -61,11 +64,25 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/branch/dashboard',
+    path: '/branch',
     element: (
       <ProtectedRoute allowedRoles={['branch']}>
-        <BranchDashboard />
+        <BranchLayout />
       </ProtectedRoute>
     ),
+    children: [
+      {
+        path: '/branch/dashboard',
+        element: <BranchDashboard />,
+      },
+      {
+        path: '/branch/dashboard/riders',
+        element: <Rider />,
+      },
+      {
+        path: '/branch/dashboard/in-charge',
+        element: <InCharge />,
+      },
+    ],
   },
 ]);

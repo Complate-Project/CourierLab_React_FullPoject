@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import BranchSidebar from '../Components/Branch/Sidebar/BranchSidebar';
 import Navbar from '../Components/Branch/Navbar/Navbar';
 
-const BranchLayout = ({ children }) => {
-  const { userRole } = useAuth();
+const BranchLayout = () => {
+  const { logout, userRole } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -13,15 +13,21 @@ const BranchLayout = ({ children }) => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // Security check
-  if (userRole !== 'branch') {
-    navigate('/login');
-  }
+  // ✅ Prevent redirect loop — use useEffect
+  useEffect(() => {
+    if (userRole !== 'branch') {
+      navigate('/login');
+    }
+  }, [userRole, navigate]);
 
   return (
     <div className="min-h-screen flex bg-gray-100">
       {/* Sidebar */}
-      <BranchSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <BranchSidebar
+        isOpen={sidebarOpen}
+        toggleSidebar={toggleSidebar}
+        logout={logout}
+      />
 
       {/* Main Content Area */}
       <div
@@ -30,12 +36,12 @@ const BranchLayout = ({ children }) => {
         }`}
       >
         {/* Navbar */}
-        <Navbar toggleSidebar={toggleSidebar}></Navbar>
+        <Navbar toggleSidebar={toggleSidebar} />
 
         {/* Main Content (Outlet) */}
-        <main className="flex-1 w-full bg-gray-50 p-6 overflow-y-auto">
-          <div className="bg-white shadow rounded-xl p-6 min-h-full">
-            {children}
+        <main className="flex-1 w-full bg-gray-50  overflow-y-auto">
+          <div className=" p-4 min-h-full">
+            <Outlet />
           </div>
         </main>
       </div>

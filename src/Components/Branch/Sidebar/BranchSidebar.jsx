@@ -22,7 +22,7 @@ import {
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const BranchSidebar = ({ isOpen, toggleSidebar }) => {
+const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
 
@@ -44,12 +44,12 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
       submenu: [
         {
           name: 'Rider ',
-          path: '/branch/staff/riders',
+          path: '/branch/dashboard/riders',
           icon: <FiTruck />,
         },
         {
           name: 'In Charge',
-          path: '/branch/staff/support',
+          path: '/branch/dashboard/in-charge',
           icon: <FiUserCheck />,
         },
       ],
@@ -219,11 +219,11 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
       )}
 
       <div
-        className={`bg-yellow-800 text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
+        className={`bg-[#001845] text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
-        <div className="p-4 border-b border-yellow-700 flex justify-between items-center">
+        <div className="p-4 border-b border-[#4361ee] flex justify-between items-center">
           {isOpen ? (
             <>
               <div>
@@ -261,8 +261,8 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
                         if (!isOpen) toggleSidebar();
                         toggleMenu(item.name);
                       }}
-                      className={`w-full flex items-center justify-between p-4 text-left hover:bg-yellow-700 transition-colors ${
-                        openMenu === item.name ? 'bg-yellow-700' : ''
+                      className={`w-full flex items-center justify-between p-4 text-left hover:bg-[#4361ee] transition-colors ${
+                        openMenu === item.name ? 'bg-[#4361ee]' : ''
                       }`}
                     >
                       <div className="flex items-center">
@@ -282,7 +282,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
                     <AnimatePresence>
                       {isOpen && openMenu === item.name && (
                         <motion.ul
-                          className="bg-yellow-900 ml-8 overflow-hidden"
+                          className="bg-[#002855] ml-8 overflow-hidden"
                           variants={submenuVariants}
                           initial="closed"
                           animate="open"
@@ -301,13 +301,13 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
                             >
                               <Link
                                 to={subItem.path}
-                                className={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-yellow-700 transition-colors ${
+                                className={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-[#4361ee] transition-colors ${
                                   isActive(subItem.path)
-                                    ? 'bg-yellow-700 border-l-4 border-yellow-500'
+                                    ? 'bg-[#4361ee] border-l-4 border-[#4361ee]'
                                     : ''
                                 }`}
                               >
-                                <span className="text-yellow-400">
+                                <span className="text-white">
                                   {subItem.icon}
                                 </span>
                                 {subItem.name}
@@ -321,9 +321,9 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`flex items-center p-4 hover:bg-yellow-700 transition-colors ${
+                    className={`flex items-center p-4 hover:bg-[#4361ee] transition-colors ${
                       isActive(item.path)
-                        ? 'bg-yellow-700 border-l-4 border-yellow-500'
+                        ? 'bg-[#4361ee] border-l-4 border-[#788bff]'
                         : ''
                     }`}
                     onClick={!isOpen ? toggleSidebar : undefined}
@@ -337,11 +337,16 @@ const BranchSidebar = ({ isOpen, toggleSidebar }) => {
           </ul>
         </nav>
 
-        {/* Logout Button Always at Bottom */}
-        <div className="p-4 border-t border-yellow-700">
-          <button className="flex items-center text-red-300 hover:text-red-200 w-full p-2 hover:bg-yellow-700 rounded transition-colors">
-            <FiLogOut className="mr-3" />
-            <span>Logout</span>
+        {/* Logout Button */}
+        <div className="p-4 border-t border-slate-700">
+          <button
+            onClick={logout}
+            className={`flex items-center w-full p-3 hover:bg-slate-700 rounded-lg transition-colors text-red-400 hover:text-red-300 ${
+              !isOpen ? 'justify-center' : ''
+            }`}
+          >
+            <FiLogOut className="w-5 h-5" />
+            {isOpen && <span className="ml-3 font-medium">Logout</span>}
           </button>
         </div>
       </div>
