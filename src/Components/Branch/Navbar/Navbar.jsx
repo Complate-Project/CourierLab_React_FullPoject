@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  FiMenu,
-  FiUser,
-  FiSearch,
-  FiBell,
-  FiMessageSquare,
-} from 'react-icons/fi';
+import { FiMenu, FiUser, FiSearch } from 'react-icons/fi';
 import { useAuth } from '../../../Hooks/useAuth';
+import DateTime from '../../../Shared/DateTime/DateTime';
 
 const Navbar = ({ toggleSidebar }) => {
   const { logout, user } = useAuth();
@@ -31,22 +26,19 @@ const Navbar = ({ toggleSidebar }) => {
   return (
     <nav className="w-full bg-white shadow-md border-b border-gray-200">
       <div className="flex justify-between items-center px-6 py-3">
-        {/* Left Section - Menu & Brand */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3">
           <button
             onClick={toggleSidebar}
-            className="text-gray-600 hover:text-gray-800 focus:outline-none transition-colors"
+            className="text-gray-600 hover:text-gray-800 focus:outline-none"
           >
-            <FiMenu className="h-6 w-6" />
+            <FiMenu className="h-8 w-8" />
           </button>
 
-          <div className="hidden md:block">
-            <h1 className="text-xl font-bold text-gray-800">
+          <div>
+            <h1 className="text-xl font-bold text-gray-800 -mb-1">
               Courier Service - Branch
             </h1>
-            <p className="text-xs text-gray-500">
-              Welcome, {user?.name || 'Branch Manager'}
-            </p>
+            <DateTime></DateTime>
           </div>
         </div>
 
@@ -63,12 +55,6 @@ const Navbar = ({ toggleSidebar }) => {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 hover:bg-white transition-colors"
               />
             </div>
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors hidden sm:block"
-            >
-              Search
-            </button>
           </form>
         </div>
 

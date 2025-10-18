@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../Hooks/useAuth';
 import { FiMenu, FiUser, FiSearch, FiBell, FiMapPin } from 'react-icons/fi';
+import DateTime from '../../../Shared/DateTime/DateTime';
 
 const Navbar = ({ toggleSidebar }) => {
   const { logout } = useAuth();
@@ -27,11 +28,15 @@ const Navbar = ({ toggleSidebar }) => {
             onClick={toggleSidebar}
             className="text-gray-600 hover:text-gray-800 focus:outline-none"
           >
-            <FiMenu className="h-6 w-6" />
+            <FiMenu className="h-8 w-8" />
           </button>
-          <h1 className="text-xl font-bold text-gray-800">
-            Courier Service - Rider
-          </h1>
+
+          <div>
+            <h1 className="text-xl font-bold text-gray-800 -mb-1">
+              Courier Service - Rider
+            </h1>
+            <DateTime></DateTime>
+          </div>
         </div>
 
         {/* Search Bar */}
@@ -47,12 +52,6 @@ const Navbar = ({ toggleSidebar }) => {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 hover:bg-white transition-colors"
               />
             </div>
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors hidden sm:block"
-            >
-              Search
-            </button>
           </form>
         </div>
 

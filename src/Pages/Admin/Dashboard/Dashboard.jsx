@@ -16,6 +16,7 @@ import {
   FiRefreshCw,
   FiUserCheck,
   FiCreditCard,
+  FiArrowRight,
 } from 'react-icons/fi';
 
 const Dashboard = () => {
@@ -150,6 +151,11 @@ const Dashboard = () => {
 
   // Top Performing Riders
   const topRiders = [
+    { name: 'Michael Chen', deliveries: 142, rating: 4.9, status: 'active' },
+    { name: 'Sarah Johnson', deliveries: 138, rating: 4.8, status: 'active' },
+    { name: 'David Wilson', deliveries: 125, rating: 4.7, status: 'on-break' },
+    { name: 'Emily Brown', deliveries: 118, rating: 4.8, status: 'active' },
+    { name: 'Alex Garcia', deliveries: 112, rating: 4.6, status: 'active' },
     { name: 'Michael Chen', deliveries: 142, rating: 4.9, status: 'active' },
     { name: 'Sarah Johnson', deliveries: 138, rating: 4.8, status: 'active' },
     { name: 'David Wilson', deliveries: 125, rating: 4.7, status: 'on-break' },
@@ -309,38 +315,56 @@ const Dashboard = () => {
         {/* Left Column - Package Status & Recent Activities (Smaller) */}
         <div className="lg:col-span-1 space-y-6">
           {/* Package Status */}
-          <div className="bg-white  shadow-sm border border-gray-200 p-6">
+          {/* Package Status */}
+          <div className="bg-white  shadow-sm border border-gray-100 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">
+              <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                <FiPackage className="w-5 h-5 text-blue-500" />
                 Package Status
               </h2>
               <Link
                 to="/admin/packages"
-                className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 transition-colors"
               >
                 View All
+                <FiArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {packageStatus.map((pkg, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-3 h-3 rounded-full ${pkg.color}`}></div>
-                    <span className="text-sm font-medium text-gray-700">
-                      {pkg.status}
+                <div
+                  key={index}
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-blue-200 transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div
+                        className={`w-3 h-3 rounded-full ${pkg.color}`}
+                      ></div>
+                      <span className="text-sm font-medium text-gray-700">
+                        {pkg.status}
+                      </span>
+                    </div>
+                    <span className="text-lg font-bold text-gray-900">
+                      {pkg.count}
                     </span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">{pkg.count}</span>
-                    <span className="text-sm text-gray-500 w-8">
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-xs text-gray-500">Progress</span>
+                    <span className="text-sm font-semibold text-gray-700">
                       {pkg.percentage}%
                     </span>
+                  </div>
+                  <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full ${pkg.color} transition-all duration-500`}
+                      style={{ width: `${pkg.percentage}%` }}
+                    ></div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
           {/* Recent Activities */}
           <div className="bg-white  shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-6">
@@ -393,7 +417,7 @@ const Dashboard = () => {
               </div>
 
               {/* Scrollable content */}
-              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+              <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                 {topRiders.map((rider, index) => (
                   <div
                     key={index}
@@ -454,7 +478,7 @@ const Dashboard = () => {
               </div>
 
               {/* Scrollable content */}
-              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+              <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                 {topBranches.map((branch, index) => (
                   <div
                     key={index}

@@ -3,6 +3,7 @@ import { useAuth } from '../Hooks/useAuth';
 import { useNavigate, Outlet } from 'react-router-dom';
 import BranchSidebar from '../Components/Branch/Sidebar/BranchSidebar';
 import Navbar from '../Components/Branch/Navbar/Navbar';
+import Footer from '../Shared/Footer/Footer';
 
 const BranchLayout = () => {
   const { logout, userRole } = useAuth();
@@ -44,6 +45,8 @@ const BranchLayout = () => {
             <Outlet />
           </div>
         </main>
+        {/* footer */}
+        <Footer></Footer>
       </div>
     </div>
   );
