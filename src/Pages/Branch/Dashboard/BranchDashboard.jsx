@@ -41,10 +41,10 @@ const BranchDashboard = () => {
       <div className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-text-main">
               Branch Dashboard
             </h1>
-            <p className="text-gray-600">
+            <p className="text-text-muted">
               Welcome back! Here's what's happening today.
             </p>
           </div>
@@ -57,8 +57,8 @@ const BranchDashboard = () => {
                   onClick={() => setTimeRange(period.toLowerCase())}
                   className={`px-4 py-2 text-sm font-medium border-r border-gray-300 last:border-r-0 transition-colors ${
                     timeRange === period.toLowerCase()
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-white text-gray-600 hover:bg-gray-50'
+                      ? 'bg-btn-secondary hover:bg-btn-secondary-hover text-white'
+                      : 'bg-bg text-text-muted hover:bg-gray-50'
                   }`}
                 >
                   {period}
@@ -72,11 +72,11 @@ const BranchDashboard = () => {
       {/* Main Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {/* Today's Shipments */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Shipments</p>
-              <p className="text-2xl font-bold text-gray-900 mt-2">
+              <p className="text-sm font-medium text-text-muted">Shipments</p>
+              <p className="text-2xl font-bold text-text-main mt-2">
                 {dashboardData.todayStats.incoming +
                   dashboardData.todayStats.outgoing}
               </p>
@@ -96,11 +96,11 @@ const BranchDashboard = () => {
         </div>
 
         {/* Delivery Performance */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Delivered</p>
-              <p className="text-2xl font-bold text-gray-900 mt-2">
+              <p className="text-sm font-medium text-text-muted">Delivered</p>
+              <p className="text-2xl font-bold text-text-main mt-2">
                 {dashboardData.todayStats.delivered}
               </p>
             </div>
@@ -116,13 +116,13 @@ const BranchDashboard = () => {
         </div>
 
         {/* Financial Overview */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">
+              <p className="text-sm font-medium text-text-muted">
                 Collected Amount
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-2">
+              <p className="text-2xl font-bold text-text-main mt-2">
                 ৳{dashboardData.financials.collected.toLocaleString()}
               </p>
             </div>
@@ -138,11 +138,13 @@ const BranchDashboard = () => {
         </div>
 
         {/* Staff Availability */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Active Riders</p>
-              <p className="text-2xl font-bold text-gray-900 mt-2">
+              <p className="text-sm font-medium text-text-muted">
+                Active Riders
+              </p>
+              <p className="text-2xl font-bold text-text-main mt-2">
                 {dashboardData.staff.activeRiders}
               </p>
             </div>
@@ -161,22 +163,24 @@ const BranchDashboard = () => {
       {/* Secondary Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Pending Actions */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center gap-3 mb-4">
             <FiClock className="w-5 h-5 text-orange-500" />
-            <h3 className="font-semibold text-gray-800">Pending Actions</h3>
+            <h3 className="font-semibold text-text-main">Pending Actions</h3>
           </div>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Pickup Requests</span>
+              <span className="text-sm text-text-muted">Pickup Requests</span>
               <span className="font-semibold text-orange-600">12</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Returns to Process</span>
+              <span className="text-sm text-text-muted">
+                Returns to Process
+              </span>
               <span className="font-semibold text-red-600">7</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-text-muted">
                 Pending Verification
               </span>
               <span className="font-semibold text-blue-600">5</span>
@@ -185,26 +189,26 @@ const BranchDashboard = () => {
         </div>
 
         {/* Alerts & Notifications */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center gap-3 mb-4">
             <FiAlertCircle className="w-5 h-5 text-red-500" />
-            <h3 className="font-semibold text-gray-800">Alerts</h3>
+            <h3 className="font-semibold text-text-main">Alerts</h3>
           </div>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Urgent Deliveries</span>
+              <span className="text-sm text-text-muted">Urgent Deliveries</span>
               <span className="font-semibold text-red-600">
                 {dashboardData.alerts.urgent}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Delayed Shipments</span>
+              <span className="text-sm text-text-muted">Delayed Shipments</span>
               <span className="font-semibold text-yellow-600">
                 {dashboardData.alerts.delayed}
               </span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Customer Returns</span>
+              <span className="text-sm text-text-muted">Customer Returns</span>
               <span className="font-semibold text-purple-600">
                 {dashboardData.alerts.returns}
               </span>
@@ -213,23 +217,23 @@ const BranchDashboard = () => {
         </div>
 
         {/* Quick Summary */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">Today's Summary</h3>
+        <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
+          <h3 className="font-semibold text-text-main mb-4">Today's Summary</h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">Total Processed:</span>
+              <span className="text-text-muted">Total Processed:</span>
               <span className="font-medium">42 parcels</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Success Rate:</span>
+              <span className="text-text-muted">Success Rate:</span>
               <span className="font-medium text-green-600">85%</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Avg. Delivery Time:</span>
+              <span className="text-text-muted">Avg. Delivery Time:</span>
               <span className="font-medium">3.2 hours</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Branch Rating:</span>
+              <span className="text-text-muted">Branch Rating:</span>
               <span className="font-medium text-yellow-600">4.2/5</span>
             </div>
           </div>
@@ -238,7 +242,7 @@ const BranchDashboard = () => {
 
       {/* Quick Actions Footer */}
       <div className="mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
-        <p className="text-sm text-gray-600 text-center">
+        <p className="text-sm text-text-muted text-center">
           Need to check something specific? Use the sidebar menu to access
           detailed reports and management tools.
         </p>

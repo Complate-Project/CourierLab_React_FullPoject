@@ -553,7 +553,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-[#04052e] text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
+        className={`bg-admin-sidebar text-text-secondary h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
@@ -562,13 +562,13 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
             <>
               <div>
                 <h1 className="text-xl font-bold">Admin Panel</h1>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-text-inverse">
                   Courier Management System
                 </p>
               </div>
               <button
                 onClick={toggleSidebar}
-                className="text-gray-400 hover:text-white lg:hidden"
+                className="text-text-inverse hover:text-white lg:hidden"
               >
                 <FiX className="h-6 w-6" />
               </button>
@@ -576,7 +576,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
           ) : (
             <button
               onClick={toggleSidebar}
-              className="text-gray-400 hover:text-white"
+              className="text-text-inverse hover:text-white"
             >
               <FiUsers className="h-6 w-6 text-white" />
             </button>
@@ -597,7 +597,9 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
                         toggleMenu(item.name);
                       }}
                       className={`w-full flex items-center justify-between p-4 text-left hover:bg-gray-700 transition-colors ${
-                        openMenu === item.name ? 'bg-gray-700' : ''
+                        openMenu === item.name
+                          ? 'bg-gray-700 border-l-4 border-blue-500'
+                          : ''
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -634,7 +636,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar, logout }) => {
                                     : ''
                                 }`}
                               >
-                                <span className="text-gray-400">
+                                <span className="text-text-inverse">
                                   {sub.icon}
                                 </span>
                                 {sub.name}

@@ -23,19 +23,19 @@ const Navbar = ({ toggleSidebar }) => {
   };
 
   return (
-    <nav className="w-full bg-white shadow-md top-0 z-50 sticky">
+    <nav className="w-full bg-bg shadow-md top-0 z-50 sticky">
       <div className="flex justify-between items-center px-6 py-4">
         {/* Left Section - Title, Date & Time */}
         <div className="flex items-center space-x-3">
           <button
             onClick={toggleSidebar}
-            className="text-gray-600 hover:text-gray-800 focus:outline-none"
+            className="text-text-muted  hover:text-text-main focus:outline-none"
           >
             <FiMenu className="h-8 w-8" />
           </button>
 
           <div>
-            <h1 className="text-xl font-bold text-gray-800 -mb-1">
+            <h1 className="text-xl font-bold text-text-main -mb-1">
               Courier Service - Admin
             </h1>
             <DateTime></DateTime>
@@ -61,7 +61,7 @@ const Navbar = ({ toggleSidebar }) => {
         {/* Right Section - Notifications, Messages, Profile */}
         <div className="flex items-center space-x-4">
           {/* Notification Bell */}
-          <button className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors">
+          <button className="relative p-2 text-text-muted  hover:text-text-main hover:bg-gray-100 rounded-full transition-colors">
             <FiBell className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               3
@@ -69,7 +69,7 @@ const Navbar = ({ toggleSidebar }) => {
           </button>
 
           {/* Messages */}
-          <button className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors">
+          <button className="relative p-2 text-text-muted  hover:text-text-main hover:bg-gray-100 rounded-full transition-colors">
             <FiMessageSquare className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               7
@@ -90,7 +90,7 @@ const Navbar = ({ toggleSidebar }) => {
 
             <button
               onClick={handleLogout}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors"
+              className="bg-btn-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-btn-primary-hover transition-colors"
             >
               Logout
             </button>
@@ -99,31 +99,31 @@ const Navbar = ({ toggleSidebar }) => {
       </div>
 
       {/* Quick Search Filters */}
-      <div className="bg-gray-50 border-t border-gray-200 px-6 py-2">
+      <div className="bg-bg border-t border-gray-200 px-6 py-2">
         <div className="flex items-center space-x-4 text-sm">
-          <span className="text-gray-600 font-medium">Quick Search:</span>
+          <span className="text-text-muted  font-medium">Quick Search:</span>
           <div className="flex space-x-2">
             <button
               onClick={() => setSearchQuery('#PK-')}
-              className="text-gray-500 hover:text-indigo-600 transition-colors"
+              className="text-text-muted hover:text-indigo-600 transition-colors"
             >
               Packages
             </button>
             <button
               onClick={() => setSearchQuery('rider:')}
-              className="text-gray-500 hover:text-indigo-600 transition-colors"
+              className="text-text-muted hover:text-indigo-600 transition-colors"
             >
               Riders
             </button>
             <button
               onClick={() => setSearchQuery('customer:')}
-              className="text-gray-500 hover:text-indigo-600 transition-colors"
+              className="text-text-muted hover:text-indigo-600 transition-colors"
             >
               Customers
             </button>
             <button
               onClick={() => setSearchQuery('branch:')}
-              className="text-gray-500 hover:text-indigo-600 transition-colors"
+              className="text-text-muted hover:text-indigo-600 transition-colors"
             >
               Branches
             </button>

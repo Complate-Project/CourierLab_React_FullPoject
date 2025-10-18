@@ -34,11 +34,12 @@ import TransferHistory from '../Pages/Branch/Transfer-History/TransferHistory';
 import RiderCollectHistory from '../Pages/Branch/Rider-Collect-History/RiderCollectHistory';
 import TransactionHistory from '../Pages/Branch/Transaction-History/TransactionHistory';
 import RiderHistory from '../Pages/Branch/Rider-History/RiderHistory';
+import Home from '../Pages/Home/Home';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/login" />,
+    Component: Home,
   },
   {
     path: '/login',

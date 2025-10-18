@@ -24,18 +24,18 @@ const Navbar = ({ toggleSidebar }) => {
   };
 
   return (
-    <nav className="w-full bg-white shadow-md border-b border-gray-200">
+    <nav className="w-full bg-bg shadow-md border-b border-gray-200">
       <div className="flex justify-between items-center px-6 py-3">
         <div className="flex items-center space-x-3">
           <button
             onClick={toggleSidebar}
-            className="text-gray-600 hover:text-gray-800 focus:outline-none"
+            className="text-text-main hover:text-text-main focus:outline-none"
           >
             <FiMenu className="h-8 w-8" />
           </button>
 
           <div>
-            <h1 className="text-xl font-bold text-gray-800 -mb-1">
+            <h1 className="text-xl font-bold text-text-main -mb-1">
               Courier Service - Branch
             </h1>
             <DateTime></DateTime>
@@ -46,13 +46,13 @@ const Navbar = ({ toggleSidebar }) => {
         <div className="flex-1 max-w-2xl mx-8">
           <form onSubmit={handleSearch} className="relative">
             <div className="relative">
-              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-inverse w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search packages, riders, customers..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 hover:bg-white transition-colors"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 hover:bg-bg transition-colors"
               />
             </div>
           </form>
@@ -81,7 +81,7 @@ const Navbar = ({ toggleSidebar }) => {
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            className="bg-btn-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-btn-primary-hover focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
           >
             Logout
           </button>
@@ -92,7 +92,7 @@ const Navbar = ({ toggleSidebar }) => {
       <div className="md:hidden px-6 pb-3">
         <form onSubmit={handleSearch} className="relative">
           <div className="relative">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-inverse h-4 w-4" />
             <input
               type="text"
               placeholder="Search parcels, tracking numbers..."

@@ -109,7 +109,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-[#00043a] text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
+        className={`bg-rider-sidebar text-text-secondary h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
@@ -117,12 +117,14 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
           {isOpen ? (
             <>
               <div>
-                <h1 className="text-xl font-bold text-white">Rider Panel</h1>
-                <p className="text-sm text-slate-300">Delivery Management</p>
+                <h1 className="text-xl font-bold text-secondary">
+                  Rider Panel
+                </h1>
+                <p className="text-sm text-text-inverse">Delivery Management</p>
               </div>
               <button
                 onClick={toggleSidebar}
-                className="text-slate-300 hover:text-white lg:hidden"
+                className="text-slate-300 hover:text-secondary lg:hidden"
               >
                 <FiX className="h-6 w-6" />
               </button>
@@ -130,9 +132,9 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
           ) : (
             <button
               onClick={toggleSidebar}
-              className="text-slate-300 hover:text-white"
+              className="text-slate-300 hover:text-secondary"
             >
-              <FiUser className="h-6 w-6 text-white" />
+              <FiUser className="h-6 w-6 text-secondary" />
             </button>
           )}
         </div>

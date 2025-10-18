@@ -244,10 +244,10 @@ const Dashboard = () => {
       <div className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-text-main">
               Admin Dashboard
             </h1>
-            <p className="text-gray-600">
+            <p className="text-text-muted">
               Welcome back! Here's what's happening today.
             </p>
           </div>
@@ -260,8 +260,8 @@ const Dashboard = () => {
                   onClick={() => setTimeRange(period.toLowerCase())}
                   className={`px-4 py-2 text-sm font-medium border-r border-gray-300 last:border-r-0 transition-colors ${
                     timeRange === period.toLowerCase()
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-white text-gray-600 hover:bg-gray-50'
+                      ? 'bg-btn-secondary hover:bg-btn-secondary-hover text-text-button'
+                      : 'bg-bg text-text-muted hover:bg-gray-50'
                   }`}
                 >
                   {period}
@@ -277,15 +277,15 @@ const Dashboard = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+            className="bg-bg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
           >
             <Link to={stat.link} className="block">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-medium text-text-muted">
                     {stat.title}
                   </p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">
+                  <p className="text-2xl font-bold text-text-main mt-1">
                     {stat.value}
                   </p>
                   <div
@@ -301,7 +301,9 @@ const Dashboard = () => {
                     <span>{stat.change} from last period</span>
                   </div>
                 </div>
-                <div className={`${stat.color} rounded-lg p-3 text-white`}>
+                <div
+                  className={`${stat.color} rounded-lg p-3 text-text-secondary`}
+                >
                   {stat.icon}
                 </div>
               </div>
@@ -316,9 +318,9 @@ const Dashboard = () => {
         <div className="lg:col-span-1 space-y-6">
           {/* Package Status */}
           {/* Package Status */}
-          <div className="bg-white  shadow-sm border border-gray-100 p-6">
+          <div className="bg-bg  shadow-sm border border-gray-100 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
                 <FiPackage className="w-5 h-5 text-blue-500" />
                 Package Status
               </h2>
@@ -345,7 +347,7 @@ const Dashboard = () => {
                         {pkg.status}
                       </span>
                     </div>
-                    <span className="text-lg font-bold text-gray-900">
+                    <span className="text-lg font-bold text-text-main">
                       {pkg.count}
                     </span>
                   </div>
@@ -366,9 +368,9 @@ const Dashboard = () => {
             </div>
           </div>
           {/* Recent Activities */}
-          <div className="bg-white  shadow-sm border border-gray-200 p-6">
+          <div className="bg-bg  shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">
+              <h2 className="text-lg font-semibold text-text-main">
                 Recent Activities
               </h2>
               <Link
@@ -388,7 +390,7 @@ const Dashboard = () => {
                 >
                   <div className="flex-shrink-0 mt-1">{activity.icon}</div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900">{activity.message}</p>
+                    <p className="text-sm text-text-main">{activity.message}</p>
                     <p className="text-xs text-gray-500 mt-1">
                       {activity.time}
                     </p>
@@ -403,9 +405,9 @@ const Dashboard = () => {
         <div className="lg:col-span-3 space-y-6">
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
             {/* Top Performing Riders */}
-            <div className="bg-white  shadow-sm border border-gray-200 p-6">
+            <div className="bg-bg  shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-text-main">
                   Top Performing Riders
                 </h2>
                 <Link
@@ -433,7 +435,7 @@ const Dashboard = () => {
                         </span>
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-text-main">
                           {rider.name}
                         </p>
                         <p className="text-xs text-gray-500">
@@ -444,7 +446,7 @@ const Dashboard = () => {
                     <div className="text-right">
                       <div className="flex items-center space-x-1 justify-end">
                         <FiTrendingUp className="w-4 h-4 text-green-500" />
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-text-main">
                           {rider.rating}
                         </span>
                       </div>
@@ -464,9 +466,9 @@ const Dashboard = () => {
             </div>
 
             {/* Top Performing Branches */}
-            <div className="bg-white  shadow-sm border border-gray-200 p-6">
+            <div className="bg-bg  shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-text-main">
                   Top Performing Branches
                 </h2>
                 <Link
@@ -490,7 +492,7 @@ const Dashboard = () => {
                           <FiMapPin className="w-5 h-5 text-purple-600" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-text-main">
                             {branch.name}
                           </p>
                           <p className="text-xs text-gray-500">
@@ -500,7 +502,7 @@ const Dashboard = () => {
                       </div>
                       <div className="flex items-center space-x-1">
                         <FiStar className="w-4 h-4 text-yellow-500" />
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-text-main">
                           {branch.rating}
                         </span>
                       </div>
@@ -509,13 +511,13 @@ const Dashboard = () => {
                     <div className="grid grid-cols-2 gap-3 mb-2">
                       <div>
                         <p className="text-xs text-gray-500">Packages</p>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-text-main">
                           {branch.packages.toLocaleString()}
                         </p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500">Revenue</p>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-text-main">
                           {branch.revenue}
                         </p>
                       </div>
@@ -553,8 +555,8 @@ const Dashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white  shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-bg  shadow-sm border border-gray-200 p-6">
+        <h2 className="text-lg font-semibold text-text-main mb-4">
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">

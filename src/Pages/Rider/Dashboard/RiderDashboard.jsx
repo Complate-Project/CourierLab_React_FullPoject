@@ -63,10 +63,10 @@ const RiderDashboard = () => {
       <div className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-text-main">
               Rider Dashboard
             </h1>
-            <p className="text-gray-600">
+            <p className="text-text-muted">
               Welcome back! Here's what's happening today.
             </p>
           </div>
@@ -79,8 +79,8 @@ const RiderDashboard = () => {
                   onClick={() => setTimeRange(period.toLowerCase())}
                   className={`px-4 py-2 text-sm font-medium border-r border-gray-300 last:border-r-0 transition-colors ${
                     timeRange === period.toLowerCase()
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-white text-gray-600 hover:bg-gray-50'
+                      ? 'bg-btn-secondary hover:bg-btn-secondary-hover text-text-button'
+                      : 'bg-bg text-text-muted hover:bg-gray-50'
                   }`}
                 >
                   {period}
@@ -96,14 +96,14 @@ const RiderDashboard = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+            className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">
+                <p className="text-sm font-medium text-text-muted">
                   {stat.title}
                 </p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">
+                <p className="text-2xl font-bold text-text-main mt-1">
                   {stat.value}
                 </p>
                 <p className="text-xs text-gray-500 mt-2">{stat.description}</p>
@@ -117,8 +117,8 @@ const RiderDashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
+        <h2 className="text-lg font-semibold text-text-main mb-4">
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

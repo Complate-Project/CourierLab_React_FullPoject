@@ -221,7 +221,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
       )}
 
       <div
-        className={`bg-[#001845] text-white h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
+        className={`bg-branch-sidebar text-text-secondary h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
           ${isOpen ? 'w-64' : 'w-20'}`}
       >
         {/* Header */}
@@ -230,11 +230,13 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
             <>
               <div>
                 <h1 className="text-xl font-bold">Branch Panel</h1>
-                <p className="text-sm text-white">Courier Branch Management</p>
+                <p className="text-sm text-text-secondary">
+                  Courier Branch Management
+                </p>
               </div>
               <button
                 onClick={toggleSidebar}
-                className="text-white hover:text-white lg:hidden"
+                className="text-text-secondary hover:text-text-secondary lg:hidden"
               >
                 <FiX className="h-6 w-6" />
               </button>
@@ -242,9 +244,9 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
           ) : (
             <button
               onClick={toggleSidebar}
-              className="text-white hover:text-white"
+              className="text-text-secondary hover:text-text-secondary"
             >
-              <FiUser className="h-6 w-6 text-white" />
+              <FiUser className="h-6 w-6 text-text-secondary" />
             </button>
           )}
         </div>
@@ -309,7 +311,7 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
                                     : ''
                                 }`}
                               >
-                                <span className="text-white">
+                                <span className="text-text-secondary">
                                   {subItem.icon}
                                 </span>
                                 {subItem.name}
