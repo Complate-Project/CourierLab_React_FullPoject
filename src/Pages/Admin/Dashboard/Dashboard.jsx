@@ -18,8 +18,10 @@ import {
   FiCreditCard,
   FiArrowRight,
 } from 'react-icons/fi';
+import useTitle from '../../../Hooks/useTitle';
 
 const Dashboard = () => {
+  useTitle('Admin Dashboard');
   const [timeRange, setTimeRange] = useState('today');
 
   const stats = [

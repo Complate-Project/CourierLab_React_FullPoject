@@ -4,8 +4,10 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import RiderSidebar from '../Components/Rider/Sidebar/RiderSidebar';
 import Navbar from '../Components/Rider/Navbar/Navbar';
 import Footer from '../Shared/Footer/Footer';
+import useTitle from '../Hooks/useTitle';
 
 const RiderLayout = () => {
+  useTitle('Rider Dashboard');
   const navigate = useNavigate();
   const { logout, userRole } = useAuth();
 

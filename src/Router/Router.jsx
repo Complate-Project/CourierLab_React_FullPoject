@@ -8,7 +8,7 @@ import ExpenseType from '../Pages/Admin/Expense-type/ExpenseType';
 import CompanyInfo from '../Pages/Admin/Company-info/CompanyInfo';
 import Dashboard from '../Pages/Admin/Dashboard/Dashboard';
 import RiderLayout from '../Layout/RiderLayout';
-import Pickup from '../Pages/Rider/Pickup/pickup';
+import Pickup from '../Pages/Rider/Pickup/Pickup';
 import BranchLayout from '../Layout/BranchLayout';
 import Rider from '../Pages/Branch/Rider/Rider';
 import InCharge from '../Pages/Branch/In-Charge/InCharge';
@@ -34,11 +34,13 @@ import TransferHistory from '../Pages/Branch/Transfer-History/TransferHistory';
 import RiderCollectHistory from '../Pages/Branch/Rider-Collect-History/RiderCollectHistory';
 import TransactionHistory from '../Pages/Branch/Transaction-History/TransactionHistory';
 import RiderHistory from '../Pages/Branch/Rider-History/RiderHistory';
+import ErrorPage from '../Pages/Error/ErrorPage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Login />,
+    errorElement: <ErrorPage></ErrorPage>,
   },
   {
     path: '/login',
@@ -51,6 +53,7 @@ export const router = createBrowserRouter([
         <AdminLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/admin/dashboard',
@@ -73,6 +76,7 @@ export const router = createBrowserRouter([
         <RiderLayout></RiderLayout>
       </ProtectedRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/rider/dashboard',
@@ -91,6 +95,7 @@ export const router = createBrowserRouter([
         <BranchLayout />
       </ProtectedRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/branch/dashboard',

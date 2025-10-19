@@ -4,11 +4,13 @@ import { useAuth } from '../Hooks/useAuth';
 import AdminSidebar from '../Components/Admin/Sidebar/AdminSidebar';
 import Navbar from '../Components/Admin/Navbar/Navbar';
 import Footer from '../Shared/Footer/Footer';
+import useTitle from '../Hooks/useTitle';
 
 const AdminLayout = () => {
   const { logout, userRole } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  useTitle('Admin Dashboard');
 
   const handleLogout = () => {
     logout();

@@ -9,8 +9,10 @@ import {
   FiMap,
   FiUser,
 } from 'react-icons/fi';
+import useTitle from '../../../Hooks/useTitle';
 
 const RiderDashboard = () => {
+  useTitle('Rider Dashboard');
   const [timeRange, setTimeRange] = useState('today');
   const stats = [
     {

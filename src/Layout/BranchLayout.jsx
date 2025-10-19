@@ -4,8 +4,10 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import BranchSidebar from '../Components/Branch/Sidebar/BranchSidebar';
 import Navbar from '../Components/Branch/Navbar/Navbar';
 import Footer from '../Shared/Footer/Footer';
+import useTitle from '../Hooks/useTitle';
 
 const BranchLayout = () => {
+  useTitle('Branch Dashboard');
   const { logout, userRole } = useAuth();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);

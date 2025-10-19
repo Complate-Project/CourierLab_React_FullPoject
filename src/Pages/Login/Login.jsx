@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Hooks/useAuth';
 import { FiPackage, FiUser, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
+  useTitle('Dashboard Login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

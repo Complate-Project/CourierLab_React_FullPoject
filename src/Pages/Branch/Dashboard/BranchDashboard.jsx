@@ -7,8 +7,10 @@ import {
   FiClock,
   FiAlertCircle,
 } from 'react-icons/fi';
+import useTitle from '../../../Hooks/useTitle';
 
 const BranchDashboard = () => {
+  useTitle('Branch Dashboard');
   const [timeRange, setTimeRange] = useState('today');
   // Sample data - in real app, this would come from API
   const dashboardData = {
