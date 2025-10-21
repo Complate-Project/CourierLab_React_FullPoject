@@ -8,6 +8,7 @@ const Navbar = ({ toggleSidebar }) => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -17,58 +18,60 @@ const Navbar = ({ toggleSidebar }) => {
   const handleSearch = e => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Implement search functionality
       console.log('Searching for:', searchQuery);
-      // navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   };
 
   return (
-    <nav className="w-full bg-bg shadow-md border-b border-gray-200">
-      <div className="flex justify-between items-center px-6 py-3">
-        <div className="flex items-center space-x-3">
+    <nav className="w-full bg-bg shadow-md border-b border-gray-200 sticky top-0 z-50">
+      <div className="flex flex-wrap justify-between items-center px-4 md:px-6 py-3">
+        {/* Left: Menu & Logo */}
+        <div className="flex items-center space-x-3 flex-shrink-0">
           <button
             onClick={toggleSidebar}
             className="text-text-main hover:text-text-main focus:outline-none"
           >
             <FiMenu className="h-8 w-8" />
           </button>
-
           <div>
-            <h1 className="text-xl font-bold text-text-main -mb-1">
+            <h1 className="text-lg sm:text-xl font-bold text-text-main -mb-1">
               Courier Service - Branch
             </h1>
-            <DateTime></DateTime>
+            <DateTime />
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="flex-1 max-w-2xl mx-8">
+        {/* Center: Desktop Search */}
+        <div className="flex-1 max-w-2xl mx-4 md:mx-8 hidden md:block">
           <form onSubmit={handleSearch} className="relative">
-            <div className="relative">
-              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-inverse w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search packages, riders, customers..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 hover:bg-bg transition-colors"
-              />
-            </div>
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-inverse w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search packages, riders, customers..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50 hover:bg-bg transition-colors"
+            />
           </form>
         </div>
 
-        {/* Right Section - User Info & Actions */}
-        <div className="flex items-center space-x-3">
-          {/* User Profile */}
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2">
-              <div className="relative">
-                <div className="flex items-center justify-center h-8 w-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full">
-                  <FiUser className="h-4 w-4 text-blue-600" />
-                </div>
+        {/* Right: User Info & Mobile Search */}
+        <div className="flex items-center space-x-2 md:space-x-3 flex-shrink-0">
+          {/* Mobile Search Button */}
+          <button
+            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+            className="md:hidden p-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-100 rounded-full transition"
+          >
+            <FiSearch className="h-5 w-5" />
+          </button>
+
+          {/* User Info */}
+          <div className="flex items-center space-x-2 md:space-x-3 border-l border-gray-200 pl-2 md:pl-3">
+            <div className="flex items-center space-x-1 md:space-x-2">
+              <div className="flex items-center justify-center h-8 w-8 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full">
+                <FiUser className="h-4 w-4 text-blue-600" />
               </div>
-              <div className="text-left border-l border-gray-200 pl-2">
+              <div className="hidden sm:block text-left">
                 <p className="text-sm font-medium text-gray-800">
                   {user?.name || 'Branch Manager'}
                 </p>
@@ -77,21 +80,20 @@ const Navbar = ({ toggleSidebar }) => {
                 </p>
               </div>
             </div>
+            <button
+              onClick={handleLogout}
+              className="hidden sm:block bg-btn-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-btn-primary-hover focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            >
+              Logout
+            </button>
           </div>
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="bg-btn-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-btn-primary-hover focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
-          >
-            Logout
-          </button>
         </div>
       </div>
 
-      {/* Mobile Search Bar (hidden on larger screens) */}
-      <div className="md:hidden px-6 pb-3">
-        <form onSubmit={handleSearch} className="relative">
-          <div className="relative">
+      {/* Mobile Search Dropdown */}
+      {isMobileSearchOpen && (
+        <div className="md:hidden px-4 pb-3">
+          <form onSubmit={handleSearch} className="relative">
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-inverse h-4 w-4" />
             <input
               type="text"
@@ -100,9 +102,9 @@ const Navbar = ({ toggleSidebar }) => {
               onChange={e => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      )}
     </nav>
   );
 };

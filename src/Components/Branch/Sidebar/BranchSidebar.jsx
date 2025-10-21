@@ -215,14 +215,16 @@ const BranchSidebar = ({ isOpen, toggleSidebar, logout }) => {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-40 backdrop-blur-xs bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
         />
       )}
 
       <div
         className={`bg-branch-sidebar text-text-secondary h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
-          ${isOpen ? 'w-64' : 'w-20'}`}
+           ${isOpen ? 'w-64' : 'w-20'} ${
+          isOpen ? 'block ' : 'hidden lg:flex '
+        }`}
       >
         {/* Header */}
         <div className="p-4 border-b border-[#4361ee] flex justify-between items-center">

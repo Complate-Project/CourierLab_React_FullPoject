@@ -94,11 +94,11 @@ const RiderDashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+            className="bg-bg rounded-md shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -110,7 +110,7 @@ const RiderDashboard = () => {
                 </p>
                 <p className="text-xs text-gray-500 mt-2">{stat.description}</p>
               </div>
-              <div className={`${stat.color} rounded-lg p-3 text-white`}>
+              <div className={`${stat.color} rounded-md p-3 text-white`}>
                 {stat.icon}
               </div>
             </div>
@@ -119,12 +119,12 @@ const RiderDashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-bg rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="bg-bg rounded-md shadow-sm border border-gray-200 p-6">
         <h2 className="text-lg font-semibold text-text-main mb-4">
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <button className="flex items-center justify-center space-x-2 p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+          <button className="flex items-center justify-center space-x-2 p-4 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors">
             <FiMap className="w-5 h-5 text-blue-600" />
             <span className="font-medium text-blue-700">View Routes</span>
           </button>
