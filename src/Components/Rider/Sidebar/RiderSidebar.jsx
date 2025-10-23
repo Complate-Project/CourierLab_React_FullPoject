@@ -10,7 +10,6 @@ import {
   FiTruck,
   FiClock,
   FiCheckCircle,
-  FiArrowUpCircle,
   FiRefreshCw,
   FiTrello,
   FiBarChart2,
@@ -38,20 +37,16 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
       icon: <FiPackage className="w-5 h-5" />,
       path: '/rider/pickup',
     },
-    {
-      name: 'Auto Pick Up',
-      icon: <FiArrowUpCircle className="w-5 h-5" />,
-      path: '/rider/auto-pickup',
-    },
+
     {
       name: 'Delivery Parcel',
       icon: <FiTruck className="w-5 h-5" />,
-      path: '/rider/delivery',
+      path: '/rider/delivery-parcel',
     },
     {
       name: 'Reschedule Order',
       icon: <FiRefreshCw className="w-5 h-5" />,
-      path: '/rider/reschedule',
+      path: '/rider/reschedule-order',
     },
     {
       name: 'Transfer Order',

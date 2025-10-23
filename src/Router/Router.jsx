@@ -35,6 +35,8 @@ import RiderCollectHistory from '../Pages/Branch/Rider-Collect-History/RiderColl
 import TransactionHistory from '../Pages/Branch/Transaction-History/TransactionHistory';
 import RiderHistory from '../Pages/Branch/Rider-History/RiderHistory';
 import ErrorPage from '../Pages/Error/ErrorPage';
+import RiderDeliveryParcel from '../Pages/Rider/Delivery-Parcel/RiderDeliveryParcel';
+import RiderRescheduleOrder from '../Pages/Rider/Reschedule-Order/RiderRescheduleOrder';
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +87,14 @@ export const router = createBrowserRouter([
       {
         path: '/rider/pickup',
         Component: Pickup,
+      },
+      {
+        path: '/rider/delivery-parcel',
+        Component: RiderDeliveryParcel,
+      },
+      {
+        path: '/rider/reschedule-order',
+        Component: RiderRescheduleOrder,
       },
     ],
   },
