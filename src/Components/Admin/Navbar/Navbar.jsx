@@ -31,7 +31,7 @@ const Navbar = ({ toggleSidebar }) => {
           {/* Sidebar toggle for mobile */}
           <button
             onClick={toggleSidebar}
-            className="text-gray-600 hover:text-indigo-600 focus:outline-none lg:hidden"
+            className="text-gray-600 hover:text-indigo-600 focus:outline-none lg:block "
           >
             <FiMenu className="h-7 w-7" />
           </button>
