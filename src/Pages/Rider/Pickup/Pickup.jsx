@@ -100,7 +100,7 @@ const Pickup = () => {
       </div>
 
       {/* Control Panel */}
-      <div className="bg-white rounded-xs shadow-sm border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xs shadow-sm border border-gray-200 p-6 ">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           {/* Left Controls */}
           <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">

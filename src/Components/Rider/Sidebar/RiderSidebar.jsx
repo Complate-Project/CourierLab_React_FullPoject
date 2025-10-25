@@ -51,12 +51,12 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
     {
       name: 'Transfer Order',
       icon: <FiTrello className="w-5 h-5" />,
-      path: '/rider/transfer',
+      path: '/rider/transfer-order',
     },
     {
       name: 'Return Parcel',
       icon: <FiPackage className="w-5 h-5" />,
-      path: '/rider/return',
+      path: '/rider/return-parcel',
     },
     {
       name: 'Report',
@@ -97,7 +97,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
       {/* Mobile overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 backdrop-blur-xs bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-50 backdrop-blur-xs bg-opacity-50 lg:hidden"
           onClick={toggleSidebar}
         />
       )}
@@ -105,7 +105,7 @@ const RiderSidebar = ({ isOpen, toggleSidebar, logout }) => {
       {/* Sidebar */}
       <div
         className={`bg-rider-sidebar text-text-secondary h-screen fixed z-50 transition-all duration-300 ease-in-out flex flex-col
-           ${isOpen ? 'w-64' : 'w-20'} ${
+           ${isOpen ? 'w-[230px]' : 'w-20'} ${
           isOpen ? 'block ' : 'hidden lg:flex '
         }`}
       >

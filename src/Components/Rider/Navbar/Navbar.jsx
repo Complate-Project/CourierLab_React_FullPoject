@@ -21,7 +21,7 @@ const Navbar = ({ toggleSidebar }) => {
   };
 
   return (
-    <nav className="w-full bg-white shadow sticky top-0 z-50">
+    <nav className="w-full bg-white shadow sticky top-0 z-40">
       <div className="flex flex-wrap justify-between items-center px-4 sm:px-6 py-3">
         {/* Left: Menu & Logo */}
         <div className="flex items-center space-x-3">

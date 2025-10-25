@@ -37,6 +37,11 @@ import RiderHistory from '../Pages/Branch/Rider-History/RiderHistory';
 import ErrorPage from '../Pages/Error/ErrorPage';
 import RiderDeliveryParcel from '../Pages/Rider/Delivery-Parcel/RiderDeliveryParcel';
 import RiderRescheduleOrder from '../Pages/Rider/Reschedule-Order/RiderRescheduleOrder';
+import TransferOrder from '../Pages/Rider/Transfer-Order/TransferOrder';
+import ReturnParcel from '../Pages/Rider/Return-Parcel/ReturnParcel';
+import ParcelHistory from '../Pages/Rider/Parcel-History/ParcelHistory';
+import RiderTransferHistory from '../Pages/Rider/Transfer-History/RiderTransferHistory';
+import RiderReturnHistory from '../Pages/Rider/Return-History/RiderReturnHistory';
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +100,26 @@ export const router = createBrowserRouter([
       {
         path: '/rider/reschedule-order',
         Component: RiderRescheduleOrder,
+      },
+      {
+        path: '/rider/transfer-order',
+        Component: TransferOrder,
+      },
+      {
+        path: '/rider/return-parcel',
+        Component: ReturnParcel,
+      },
+      {
+        path: '/rider/reports/parcel-history',
+        Component: ParcelHistory,
+      },
+      {
+        path: '/rider/reports/transfer-history',
+        Component: RiderTransferHistory,
+      },
+      {
+        path: '/rider/reports/return-history',
+        Component: RiderReturnHistory,
       },
     ],
   },

@@ -20,12 +20,12 @@ const ErrorPage = () => {
           </div>
 
           {/* Error Code */}
-          <h1 className="text-8xl md:text-9xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-7xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent">
             {error?.status || '404'}
           </h1>
 
           {/* Main Message */}
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
             {error?.status === 404 ? 'Page Not Found' : 'Something Went Wrong'}
           </h2>
 
